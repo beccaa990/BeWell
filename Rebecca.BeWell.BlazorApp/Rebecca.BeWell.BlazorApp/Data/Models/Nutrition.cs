@@ -2,24 +2,17 @@
 
 namespace Rebecca.BeWell.BlazorApp.Data.Models
 {
-    public class Activity
+    public class Nutrition
     {
         [Key]
         public int Id { get; set; }
+        public string Name { get; set; }
 
-        public virtual ActivityType ActivityType{ get; set; }
-
-        public int Mins { get; set; }
-
-        public virtual Intensity Intensity { get; set; }
+        public string Type { get; set; }    
+        public string Description { get; set; }
+        public int Calories { get; set; }
 
         public DateTime TimeStamp { get; set; }
-
-
-
-
-
-
 
 
     }

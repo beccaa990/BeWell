@@ -14,6 +14,10 @@ namespace Rebecca.BeWell.BlazorApp.Data.Models
 
         public virtual List<Activity>? Activities { get; set; }
 
+        public virtual List<Nutrition> Nutritions { get; set;}
+
+        public virtual List<Sleep> Sleeps { get; set; }
+
 
 
     }
