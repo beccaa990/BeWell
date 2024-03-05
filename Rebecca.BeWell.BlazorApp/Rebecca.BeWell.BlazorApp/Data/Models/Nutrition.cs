@@ -14,6 +14,8 @@ namespace Rebecca.BeWell.BlazorApp.Data.Models
 
         public DateTime TimeStamp { get; set; }
 
+        public virtual NutritionType NutritionType { get; set; }
+
 
     }
 }

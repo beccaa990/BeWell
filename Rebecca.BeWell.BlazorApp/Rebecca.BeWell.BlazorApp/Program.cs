@@ -5,6 +5,8 @@ using Rebecca.BeWell.BlazorApp.Client.Pages;
 using Rebecca.BeWell.BlazorApp.Components;
 using Rebecca.BeWell.BlazorApp.Components.Account;
 using Rebecca.BeWell.BlazorApp.Data;
+using Rebecca.BeWell.BlazorApp.Services.Interfaces;
+using Rebecca.BeWell.BlazorApp.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,7 +43,22 @@ builder.Services.AddBlazorBootstrap();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 
+
+builder.Services.AddScoped<ISleepService, SleepService>();
+
+builder.Services.AddScoped<IIntensityService, IntensityService>();
+
+builder.Services.AddScoped<IActivityService, ActivityService>();
+
+builder.Services.AddScoped<IProfileService, ProfileService>();
+
+builder.Services.AddScoped<INutritionService, NutritionService>();
+
+builder.Services.AddControllers();
+
 var app = builder.Build();
+
+app.MapControllers();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -67,6 +84,7 @@ app.MapRazorComponents<App>()
 
 // Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
+
 
 
 app.Run();

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebecca.BeWell.BlazorApp", "..\..\source\BeWell\Rebecca.BeWell.BlazorApp\Rebecca.BeWell.BlazorApp\Rebecca.BeWell.BlazorApp.csproj", "{5D3F8D3D-6061-413F-B18C-7C4C478419EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rebecca.BeWell.BlazorApp", "Rebecca.BeWell.BlazorApp\Rebecca.BeWell.BlazorApp\Rebecca.BeWell.BlazorApp.csproj", "{5D3F8D3D-6061-413F-B18C-7C4C478419EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebecca.BeWell.BlazorApp.Client", "..\..\source\BeWell\Rebecca.BeWell.BlazorApp\Rebecca.BeWell.BlazorApp.Client\Rebecca.BeWell.BlazorApp.Client.csproj", "{7030D13A-1A46-41FB-91D7-2B914CB53773}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rebecca.BeWell.BlazorApp.Client", "Rebecca.BeWell.BlazorApp\Rebecca.BeWell.BlazorApp.Client\Rebecca.BeWell.BlazorApp.Client.csproj", "{7030D13A-1A46-41FB-91D7-2B914CB53773}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
