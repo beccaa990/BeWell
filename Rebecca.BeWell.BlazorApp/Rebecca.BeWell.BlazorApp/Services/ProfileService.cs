@@ -23,7 +23,6 @@ namespace Rebecca.BeWell.BlazorApp.Services
         }
         public async Task<Profile?> GetProfileByUserId(string UserId)
         {
-
             Profile profile = await _context.Profiles.SingleOrDefaultAsync(p => p.UserID == UserId);
 
             return profile;
@@ -78,5 +77,23 @@ namespace Rebecca.BeWell.BlazorApp.Services
             }
         }
 
+        public async Task<bool> DeleteProfile(int id)
+        {
+            try
+            {
+                Profile? profile = await _context.Profiles.SingleOrDefaultAsync(x => x.Id == id);
+
+                _context.Profiles.Remove(profile);
+                await _context.SaveChangesAsync();
+
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
     }
 }

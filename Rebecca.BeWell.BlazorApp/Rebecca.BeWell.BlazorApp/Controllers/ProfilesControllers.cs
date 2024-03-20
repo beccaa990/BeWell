@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace Rebecca.BeWell.BlazorApp.Controllers
 {
-    [Route("api/Profiles)]
+    [Route("api/Profiles")]
     [ApiController]
     public class ProfilesController : ControllerBase
     {
@@ -34,7 +34,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         public async Task<IActionResult> GetProfilesByUserId(string userId)
         {
-            List<Data.Models.Profile> profile = await _profileService.GetProfileByUserId(userId);
+            Data.Models.Profile profile = await _profileService.GetProfileByUserId(userId);
 
             return Ok(profile);
         }
