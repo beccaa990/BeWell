@@ -1,43 +1,75 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Rebecca.BeWell.BlazorApp.Data.Models;
+using Rebecca.BeWell.BlazorApp.Services;
+using Rebecca.BeWell.BlazorApp.Services.Interfaces;
+using System.Diagnostics;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Rebecca.BeWell.BlazorApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Activities")]
     [ApiController]
     public class ActivitiesControllercs : ControllerBase
     {
-        // GET: api/<ActivitiesControllercs>
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+    private readonly IActivityService _activityService;
+
+        public ActivitiesControllercs(IActivityService activityService)
         {
-            return new string[] { "value1", "value2" };
+            _activityService = activityService;
         }
 
-        // GET api/<ActivitiesControllercs>/5
+
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> GetActivityById(int Id)
         {
-            return "value";
+            Data.Models.Activity activity = await _activityService.GetActivityById(Id);
+
+            return Ok(activity);
         }
 
-        // POST api/<ActivitiesControllercs>
+
+
+        [HttpGet("user/{userid}")]
+
+        public async Task<IActionResult> GetActivitiesByUserId(string userId)
+        {
+           List< Data.Models.Activity> activity = await _activityService.GetActivitiesByUserId(userId);
+
+            return Ok(activity);
+        }
+
+
+
+        // POST api/Activity/Update
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Update(Data.Models.Activity activity)
         {
+
+            bool isUpdated = await  _activityService.UpdateActivity(activity);
+
+            return Ok(isUpdated);
         }
 
-        // PUT api/<ActivitiesControllercs>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // POST api/Activity/Create
+        [HttpPost]
+        public async Task<IActionResult> Create(Data.Models.Activity activity)
         {
+
+            bool isCreated = await _activityService.CreateActivity(activity);
+
+            return Ok(isCreated);
         }
+
 
         // DELETE api/<ActivitiesControllercs>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpGet("delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
+            bool isDelete = await _activityService.DeleteActivity(id);
+
+            return Ok(isDelete);
         }
     }
 }
