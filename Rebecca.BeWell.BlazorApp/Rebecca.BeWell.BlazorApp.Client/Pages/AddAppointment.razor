@@ -1,7 +1,5 @@
-﻿
-<h3>AddAppointment</h3>
-
-@inject DialogService DialogService
+﻿@using Rebecca.BeWell.BlazorApp.Client.Model
+<h3>AddAppointment</h3>#
 
 <RadzenTemplateForm TItem="Appointment" Data="@model" Submit=@OnSubmit>
     <div class="row" style="margin-bottom: 16px">
@@ -34,7 +32,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col">
-            <RadzenButton ButtonType="ButtonType.Submit" Text="Save" />
+            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="Save" />
         </div>
     </div>
 </RadzenTemplateForm>

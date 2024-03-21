@@ -1,8 +1,8 @@
-﻿<h3>EditAppointment</h3>
-[14:49] Reid, Dominic
-@inject DialogService DialogService
+﻿@using Rebecca.BeWell.BlazorApp.Client.Model
 
-<RadzenTemplateForm TItem="Appointment" Data="@model" Submit=@OnSubmit>
+<h3>EditAppointment</h3>
+
+<RadzenTemplateForm TItem="Rebecca.BeWell.BlazorApp.Client.Model.Appointment" Data="@model" Submit=@OnSubmit>
     <div class="row" style="margin-bottom: 16px">
         <div class="col-md-3">
             <RadzenLabel Text="Text" />
@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col">
-            <RadzenButton ButtonType="ButtonType.Submit" Text="Save" />
+            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="Save" />
         </div>
     </div>
 </RadzenTemplateForm>

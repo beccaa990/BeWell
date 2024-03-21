@@ -31,7 +31,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
             model.End = End;
         }
 
-        void OnSubmit(Appointment model)
+        public void OnSubmit(Appointment model)
         {
             DialogService.Close(model);
         }

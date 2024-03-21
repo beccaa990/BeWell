@@ -1,5 +1,7 @@
-﻿@page "/counter"
+﻿@using Rebecca.BeWell.BlazorApp.Client.Model
+@page "/counter"
 @rendermode InteractiveWebAssembly
+
 
 <PageTitle>Calendar</PageTitle>
 
@@ -8,9 +10,9 @@
 <h3>Calendar</h3>
 
 <RadzenScheduler @ref=@scheduler SlotRender=@OnSlotRender style="height: 768px;" TItem="Appointment" Data=@appointments StartProperty="Start" EndProperty="End"
-    TextProperty="Text" SelectedIndex="2"
-    SlotSelect=@OnSlotSelect AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender
-    AppointmentMove=@OnAppointmentMove >
+                 TextProperty="Text" SelectedIndex="2"
+                 SlotSelect=@OnSlotSelect AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender
+                 @* AppointmentMove=@OnAppointmentMove *@>
     <RadzenDayView />
     <RadzenWeekView />
     <RadzenMonthView />

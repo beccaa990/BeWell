@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Radzen.Blazor.Rendering;
 using Radzen.Blazor;
 using Radzen;
-using System;
-using static System.Net.WebRequestMethods;
 
 namespace Rebecca.BeWell.BlazorApp.Client.Pages
 {
