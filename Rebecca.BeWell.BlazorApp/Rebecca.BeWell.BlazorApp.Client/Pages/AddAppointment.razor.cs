@@ -19,24 +19,22 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         DialogService DialogService { get; set; }
 
         protected override async Task OnInitializedAsync()
-
         {
 
 
 
         }
+
         protected override void OnParametersSet()
         {
             model.Start = Start;
             model.End = End;
         }
 
-        public void OnSubmit(Appointment model)
+        private void OnSubmit()
         {
             DialogService.Close(model);
         }
 
     }
-
-
 }
