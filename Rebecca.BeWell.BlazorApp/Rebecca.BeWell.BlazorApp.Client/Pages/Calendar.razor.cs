@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Radzen.Blazor;
 using Radzen;
+using Radzen.Blazor.Rendering;
 
 namespace Rebecca.BeWell.BlazorApp.Client.Pages
 {
@@ -51,7 +52,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
             if (args.View.Text != "Year")
             {
-                Rebecca.BeWell.BlazorApp.Client.Model.Appointment data = await DialogService.OpenAsync<AddAppointment>("Add Appointment",
+                Rebecca.BeWell.BlazorApp.Client.Model.Appointment data = await DialogService.OpenAsync<AddAppointmentPage>("Add Appointment",
                     new Dictionary<string, object> { { "Start", args.Start }, { "End", args.End } });
 
                 if (data != null)
@@ -73,7 +74,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                 Text = args.Data.Text
             };
 
-            var data = await DialogService.OpenAsync<EditAppointment>("Edit Appointment", new Dictionary<string, object> { { "Appointment", copy } });
+            var data = await DialogService.OpenAsync<EditAppointmentPage>("Edit Appointment", new Dictionary<string, object> { { "Appointment", copy } });
 
             if (data != null)
             {
@@ -96,23 +97,19 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
             }
         }
 
-        //async Task OnAppointmentMove(SchedulerAppointmentMouseEventArgs args)
-        //{
-        //    var draggedAppointment = appointments.FirstOrDefault(x => x == args.Appointment.Data);
+        async Task OnAppointmentMove(SchedulerAppointmentMouseEventArgs<Rebecca.BeWell.BlazorApp.Client.Model.Appointment> args)
+        {
+            //var draggedAppointment = appointments.FirstOrDefault(x => x == args.Appointment.Data);
 
-        //    if (draggedAppointment != null)
-        //    {
-        //        draggedAppointment.Start = draggedAppointment.Start + args.TimeSpan;
+            //if (draggedAppointment != null)
+            //{
+            //    draggedAppointment.Start = draggedAppointment.Start + args.TimeSpan;
 
-        //        draggedAppointment.End = draggedAppointment.End + args.TimeSpan;
+            //    draggedAppointment.End = draggedAppointment.End + args.TimeSpan;
 
-        //        await scheduler.Reload();
-        //    }
-        //}
-
-
-
-
+            //    await scheduler.Reload();
+            //}
+        }
     }
 }
 

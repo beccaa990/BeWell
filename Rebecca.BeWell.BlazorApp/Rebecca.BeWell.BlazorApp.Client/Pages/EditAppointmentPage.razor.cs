@@ -3,7 +3,7 @@ using Radzen;
 
 namespace Rebecca.BeWell.BlazorApp.Client.Pages
 {
-    public partial class EditAppointment : ComponentBase
+    public partial class EditAppointmentPage : ComponentBase
     {
         [Parameter]
         public DateTime Start { get; set; }

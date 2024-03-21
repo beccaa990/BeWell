@@ -7,6 +7,7 @@ using Rebecca.BeWell.BlazorApp.Components.Account;
 using Rebecca.BeWell.BlazorApp.Data;
 using Rebecca.BeWell.BlazorApp.Services.Interfaces;
 using Rebecca.BeWell.BlazorApp.Services;
+using Radzen;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +21,7 @@ builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, PersistingServerAuthenticationStateProvider>();
-
+builder.Services.AddScoped<DialogService>();
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(options =>
     {
@@ -40,6 +41,8 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
     .AddDefaultTokenProviders();
 
 builder.Services.AddBlazorBootstrap();
+
+builder.Services.AddRadzenComponents();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 

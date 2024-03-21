@@ -4,7 +4,7 @@ using Radzen;
 
 namespace Rebecca.BeWell.BlazorApp.Client.Pages
 {
-    public partial class AddAppointment : ComponentBase
+    public partial class AddAppointmentPage : ComponentBase
     {
 
         [Parameter]
