@@ -74,7 +74,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                 Text = args.Data.Text
             };
 
-            var data = await DialogService.OpenAsync<EditAppointmentPage>("Edit Appointment", new Dictionary<string, object> { { "Appointment", copy } });
+            var data = await DialogService.OpenAsync<EditAppointmentPage>("Edit Appointment", new Dictionary<string, object> { { "model", copy } });
 
             if (data != null)
             {

@@ -10,8 +10,8 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
         [Parameter]
         public DateTime End { get; set; }
-
-        Rebecca.BeWell.BlazorApp.Client.Model.Appointment model = new Rebecca.BeWell.BlazorApp.Client.Model.Appointment();
+        [Parameter]
+        public Rebecca.BeWell.BlazorApp.Client.Model.Appointment model { get; set; } = new Rebecca.BeWell.BlazorApp.Client.Model.Appointment();
 
         protected override void OnParametersSet()
         {
