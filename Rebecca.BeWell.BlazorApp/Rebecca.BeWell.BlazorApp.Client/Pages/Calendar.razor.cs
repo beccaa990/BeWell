@@ -11,13 +11,13 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
     public partial class Calendar: ComponentBase
 
     {
-        public RadzenScheduler<Rebecca.BeWell.BlazorApp.Client.Model.Appointment> scheduler { get; set; }
+        public RadzenScheduler<Shared.Models.Appointment> scheduler { get; set; }
         public Dictionary<DateTime, string> events { get; set; } = new Dictionary<DateTime, string>();
 
         [Inject]
         DialogService DialogService { get; set; }
 
-        IList<Rebecca.BeWell.BlazorApp.Client.Model.Appointment> appointments = new List<Rebecca.BeWell.BlazorApp.Client.Model.Appointment>
+        IList<Shared.Models.Appointment> appointments = new List<Shared.Models.Appointment>
     {
     ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddDays(-2), End = DateTime.Today.AddDays(-2), Text = "Birthday" },
     ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddDays(-11), End = DateTime.Today.AddDays(-10), Text = "Day off" },
@@ -55,7 +55,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
             if (args.View.Text != "Year")
             {
-                Rebecca.BeWell.BlazorApp.Client.Model.Appointment data = await DialogService.OpenAsync<AddAppointmentPage>("Add Appointment",
+                Shared.Models.Appointment data = await DialogService.OpenAsync<AddAppointmentPage>("Add Appointment",
                     new Dictionary<string, object> { { "Start", args.Start }, { "End", args.End } });
 
                 if (data != null)
@@ -67,10 +67,10 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
             }
         }
 
-        async Task OnAppointmentSelect(SchedulerAppointmentSelectEventArgs<Rebecca.BeWell.BlazorApp.Client.Model.Appointment> args)
+        async Task OnAppointmentSelect(SchedulerAppointmentSelectEventArgs<Shared.Models.Appointment> args)
         {
 
-            var copy = new Rebecca.BeWell.BlazorApp.Client.Model.Appointment
+            var copy = new Rebecca.BeWell.BlazorApp.Shared.Models.Appointment
             {
                 Start = args.Data.Start,
                 End = args.Data.End,
@@ -90,7 +90,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
             await scheduler.Reload();
         }
 
-        void OnAppointmentRender(SchedulerAppointmentRenderEventArgs<Rebecca.BeWell.BlazorApp.Client.Model.Appointment> args)
+        void OnAppointmentRender(SchedulerAppointmentRenderEventArgs<Shared.Models.Appointment> args)
         {
             // Never call StateHasChanged in AppointmentRender - would lead to infinite loop
 
@@ -100,7 +100,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
             }
         }
 
-        async Task OnAppointmentMove(SchedulerAppointmentMouseEventArgs<Rebecca.BeWell.BlazorApp.Client.Model.Appointment> args)
+        async Task OnAppointmentMove(SchedulerAppointmentMouseEventArgs<Shared.Models.Appointment> args)
         {
             //var draggedAppointment = appointments.FirstOrDefault(x => x == args.Appointment.Data);
 

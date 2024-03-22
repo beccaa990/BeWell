@@ -1,7 +1,7 @@
-﻿@using Rebecca.BeWell.BlazorApp.Client.Model
+﻿@using Rebecca.BeWell.BlazorApp.Shared.Models
 @rendermode InteractiveWebAssembly
 
-<RadzenTemplateForm TItem="Rebecca.BeWell.BlazorApp.Client.Model.Appointment" Data="@model" Submit=@OnSubmit>
+<RadzenTemplateForm TItem="Appointment" Data="@model" Submit=@OnSubmit>
     <div class="row" style="margin-bottom: 16px">
         <div class="col-md-3">
             <RadzenLabel Text="Text" />

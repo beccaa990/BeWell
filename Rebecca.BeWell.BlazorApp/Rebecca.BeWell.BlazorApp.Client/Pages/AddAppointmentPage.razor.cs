@@ -16,7 +16,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         public DateTime End { get; set; }
 
 
-        Rebecca.BeWell.BlazorApp.Client.Model.Appointment model = new Rebecca.BeWell.BlazorApp.Client.Model.Appointment();
+        Shared.Models.Appointment model = new Rebecca.BeWell.BlazorApp.Shared.Models.Appointment();
         
         [Inject]
         DialogService DialogService { get; set; }

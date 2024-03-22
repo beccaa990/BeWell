@@ -1,4 +1,4 @@
-﻿namespace Rebecca.BeWell.BlazorApp.Client.Model
+﻿namespace Rebecca.BeWell.BlazorApp.Shared.Models
 {
     public class Appointment
     {

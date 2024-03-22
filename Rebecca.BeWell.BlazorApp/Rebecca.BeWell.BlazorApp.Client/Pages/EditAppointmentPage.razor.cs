@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Radzen;
+using Rebecca.BeWell.BlazorApp.Shared.Models;
 
 namespace Rebecca.BeWell.BlazorApp.Client.Pages
 {
@@ -11,7 +12,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         [Parameter]
         public DateTime End { get; set; }
         [Parameter]
-        public Rebecca.BeWell.BlazorApp.Client.Model.Appointment model { get; set; } = new Rebecca.BeWell.BlazorApp.Client.Model.Appointment();
+        public Appointment model { get; set; } = new Rebecca.BeWell.BlazorApp.Shared.Models.Appointment();
 
         protected override void OnParametersSet()
         {
@@ -20,7 +21,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         }
         [Inject]
         DialogService DialogService { get; set; }
-        void OnSubmit(Rebecca.BeWell.BlazorApp.Client.Model.Appointment model)
+        void OnSubmit(Appointment model)
         { 
             DialogService.Close(model);
         }
