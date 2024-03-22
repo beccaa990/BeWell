@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Identity;
-using Rebecca.BeWell.BlazorApp.Data;
+using Rebecca.BeWell.BlazorApp.Shared.Data;
 
 namespace Rebecca.BeWell.BlazorApp.Components.Account
 {

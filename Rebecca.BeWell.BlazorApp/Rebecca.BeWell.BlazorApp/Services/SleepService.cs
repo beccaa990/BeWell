@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Rebecca.BeWell.BlazorApp.Data.Models;
-using Rebecca.BeWell.BlazorApp.Data;
+using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
+using Rebecca.BeWell.BlazorApp.Shared.Data;
 using Rebecca.BeWell.BlazorApp.Services.Interfaces;
 
 namespace Rebecca.BeWell.BlazorApp.Services

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rebecca.BeWell.BlazorApp.Data.Models;
+using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
 using Rebecca.BeWell.BlazorApp.Services;
 using Rebecca.BeWell.BlazorApp.Services.Interfaces;
 using System.Diagnostics;
@@ -24,7 +24,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetNutritionById(int Id)
         {
-            Data.Models.Nutrition nutrition = await _nutritionService.GetNutritionById(Id);
+           Nutrition nutrition = await _nutritionService.GetNutritionById(Id);
 
             return Ok(nutrition);
         }
@@ -34,7 +34,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         public async Task<IActionResult> GetNutritionsByUserId(string userId)
         {
-            List<Data.Models.Nutrition> nutrition = await _nutritionService.GetNutritionsByUserId(userId);
+            List<Nutrition> nutrition = await _nutritionService.GetNutritionsByUserId(userId);
 
             return Ok(nutrition);
         }
@@ -42,7 +42,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         // POST api/Activity/Update
         [HttpPost]
-        public async Task<IActionResult> Update(Data.Models.Nutrition nutrition)
+        public async Task<IActionResult> Update(Nutrition nutrition)
         {
 
             bool isUpdated = await  _nutritionService.UpdateNutrition(nutrition);
@@ -52,7 +52,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         // POST api/Activity/Create
         [HttpPost]
-        public async Task<IActionResult> Create(Data.Models.Nutrition nutrition)
+        public async Task<IActionResult> Create(Nutrition nutrition)
         {
 
             bool isCreated = await _nutritionService.CreateNutrition(nutrition);

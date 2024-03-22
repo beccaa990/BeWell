@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Rebecca.BeWell.BlazorApp.Data.Models
+namespace Rebecca.BeWell.BlazorApp.Shared.Data.Models
 {
     public class Activity
     {
         [Key]
         public int Id { get; set; }
 
-        public virtual ActivityType ActivityType{ get; set; }
+        public virtual ActivityType ActivityType { get; set; }
 
         public int Mins { get; set; }
 

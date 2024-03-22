@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Rebecca.BeWell.BlazorApp.Data.Models
+namespace Rebecca.BeWell.BlazorApp.Shared.Data.Models
 {
     public class Intensity
     {

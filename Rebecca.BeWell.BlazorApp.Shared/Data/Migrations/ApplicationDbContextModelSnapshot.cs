@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Rebecca.BeWell.BlazorApp.Data;
+using Rebecca.BeWell.BlazorApp.Shared.Data;
 
 #nullable disable
 
 namespace Rebecca.BeWell.BlazorApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240227113737_InitialDB")]
-    partial class InitialDB
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,12 +167,23 @@ namespace Rebecca.BeWell.BlazorApp.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateOnly>("DOB")
+                        .HasColumnType("date");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -221,6 +229,177 @@ namespace Rebecca.BeWell.BlazorApp.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Rebecca.BeWell.BlazorApp.Data.Models.Activity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ActivityTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IntensityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Mins")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityTypeId");
+
+                    b.HasIndex("IntensityId");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("Activities");
+                });
+
+            modelBuilder.Entity("Rebecca.BeWell.BlazorApp.Data.Models.ActivityType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ActivityTypes");
+                });
+
+            modelBuilder.Entity("Rebecca.BeWell.BlazorApp.Data.Models.Intensity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Intensities");
+                });
+
+            modelBuilder.Entity("Rebecca.BeWell.BlazorApp.Data.Models.Nutrition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Calories")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("Nutritions");
+                });
+
+            modelBuilder.Entity("Rebecca.BeWell.BlazorApp.Data.Models.NutritionType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NutritionTypes");
+                });
+
+            modelBuilder.Entity("Rebecca.BeWell.BlazorApp.Data.Models.Profile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Profiles");
+                });
+
+            modelBuilder.Entity("Rebecca.BeWell.BlazorApp.Data.Models.Sleep", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Mins")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("Sleeps");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -272,6 +451,52 @@ namespace Rebecca.BeWell.BlazorApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Rebecca.BeWell.BlazorApp.Data.Models.Activity", b =>
+                {
+                    b.HasOne("Rebecca.BeWell.BlazorApp.Data.Models.ActivityType", "ActivityType")
+                        .WithMany()
+                        .HasForeignKey("ActivityTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Rebecca.BeWell.BlazorApp.Data.Models.Intensity", "Intensity")
+                        .WithMany()
+                        .HasForeignKey("IntensityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Rebecca.BeWell.BlazorApp.Data.Models.Profile", null)
+                        .WithMany("Activities")
+                        .HasForeignKey("ProfileId");
+
+                    b.Navigation("ActivityType");
+
+                    b.Navigation("Intensity");
+                });
+
+            modelBuilder.Entity("Rebecca.BeWell.BlazorApp.Data.Models.Nutrition", b =>
+                {
+                    b.HasOne("Rebecca.BeWell.BlazorApp.Data.Models.Profile", null)
+                        .WithMany("Nutritions")
+                        .HasForeignKey("ProfileId");
+                });
+
+            modelBuilder.Entity("Rebecca.BeWell.BlazorApp.Data.Models.Sleep", b =>
+                {
+                    b.HasOne("Rebecca.BeWell.BlazorApp.Data.Models.Profile", null)
+                        .WithMany("Sleeps")
+                        .HasForeignKey("ProfileId");
+                });
+
+            modelBuilder.Entity("Rebecca.BeWell.BlazorApp.Data.Models.Profile", b =>
+                {
+                    b.Navigation("Activities");
+
+                    b.Navigation("Nutritions");
+
+                    b.Navigation("Sleeps");
                 });
 #pragma warning restore 612, 618
         }

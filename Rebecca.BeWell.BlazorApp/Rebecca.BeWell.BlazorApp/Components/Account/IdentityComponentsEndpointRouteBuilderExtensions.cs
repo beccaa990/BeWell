@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using Rebecca.BeWell.BlazorApp.Components.Account.Pages;
 using Rebecca.BeWell.BlazorApp.Components.Account.Pages.Manage;
-using Rebecca.BeWell.BlazorApp.Data;
+using Rebecca.BeWell.BlazorApp.Shared.Data;
 using System.Security.Claims;
 using System.Text.Json;
 

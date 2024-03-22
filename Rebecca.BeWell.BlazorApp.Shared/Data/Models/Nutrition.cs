@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Rebecca.BeWell.BlazorApp.Data.Models
+namespace Rebecca.BeWell.BlazorApp.Shared.Data.Models
 {
     public class Nutrition
     {
@@ -8,7 +8,7 @@ namespace Rebecca.BeWell.BlazorApp.Data.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public string Type { get; set; }    
+        public string Type { get; set; }
         public string Description { get; set; }
         public int Calories { get; set; }
 

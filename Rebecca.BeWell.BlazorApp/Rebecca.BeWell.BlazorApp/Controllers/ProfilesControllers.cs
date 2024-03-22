@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rebecca.BeWell.BlazorApp.Data.Models;
+using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
 using Rebecca.BeWell.BlazorApp.Services;
 using Rebecca.BeWell.BlazorApp.Services.Interfaces;
 using System.Diagnostics;
@@ -24,7 +24,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProfileById(int Id)
         {
-            Data.Models.Profile profile = await _profileService.GetProfileById(Id);
+            Profile profile = await _profileService.GetProfileById(Id);
 
             return Ok(profile);
         }
@@ -34,7 +34,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         public async Task<IActionResult> GetProfilesByUserId(string userId)
         {
-            Data.Models.Profile profile = await _profileService.GetProfileByUserId(userId);
+            Profile profile = await _profileService.GetProfileByUserId(userId);
 
             return Ok(profile);
         }
@@ -42,7 +42,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         // POST api/Activity/Update
         [HttpPost]
-        public async Task<IActionResult> Update(Data.Models.Profile profile)
+        public async Task<IActionResult> Update(Profile profile)
         {
 
             bool isUpdated = await  _profileService.UpdateProfile(profile);
@@ -52,7 +52,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         // POST api/Activity/Create
         [HttpPost]
-        public async Task<IActionResult> Create(Data.Models.Profile profile)
+        public async Task<IActionResult> Create(Profile profile)
         {
 
             bool isCreated = await _profileService.CreateProfile(profile);

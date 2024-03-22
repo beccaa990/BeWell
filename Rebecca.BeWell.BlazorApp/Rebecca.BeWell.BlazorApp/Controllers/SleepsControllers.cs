@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rebecca.BeWell.BlazorApp.Data.Models;
+using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
 using Rebecca.BeWell.BlazorApp.Services;
 using Rebecca.BeWell.BlazorApp.Services.Interfaces;
 using System.Diagnostics;
@@ -24,7 +24,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSleepById(int Id)
         {
-            Data.Models.Sleep sleep = await _sleepService.GetSleepById(Id);
+            Sleep sleep = await _sleepService.GetSleepById(Id);
 
             return Ok(sleep);
         }
@@ -34,7 +34,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         // POST api/Activity/Update
         [HttpPost]
-        public async Task<IActionResult> Update(Data.Models.Sleep sleep)
+        public async Task<IActionResult> Update(Sleep sleep)
         {
 
             bool isUpdated = await  _sleepService.UpdateSleep(sleep);
@@ -44,7 +44,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         // POST api/Activity/Create
         [HttpPost]
-        public async Task<IActionResult> Create(Data.Models.Sleep sleep)
+        public async Task<IActionResult> Create(Sleep sleep)
         {
 
             bool isCreated = await _sleepService.CreateSleep(sleep);

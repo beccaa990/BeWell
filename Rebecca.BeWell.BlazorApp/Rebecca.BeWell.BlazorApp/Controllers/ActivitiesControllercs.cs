@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rebecca.BeWell.BlazorApp.Data.Models;
+using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
 using Rebecca.BeWell.BlazorApp.Services;
 using Rebecca.BeWell.BlazorApp.Services.Interfaces;
 using System.Diagnostics;
@@ -13,7 +13,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
     public class ActivitiesControllercs : ControllerBase
     {
 
-    private readonly IActivityService _activityService;
+        private readonly IActivityService _activityService;
 
         public ActivitiesControllercs(IActivityService activityService)
         {
@@ -24,7 +24,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetActivityById(int Id)
         {
-            Data.Models.Activity activity = await _activityService.GetActivityById(Id);
+            Shared.Data.Models.Activity activity = await _activityService.GetActivityById(Id);
 
             return Ok(activity);
         }
@@ -35,26 +35,28 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         public async Task<IActionResult> GetActivitiesByUserId(string userId)
         {
-           List< Data.Models.Activity> activity = await _activityService.GetActivitiesByUserId(userId);
+
+            List<Shared.Data.Models.Activity> activity = await _activityService.GetActivitiesByUserId(userId);
 
             return Ok(activity);
         }
 
 
 
+
         // POST api/Activity/Update
         [HttpPost]
-        public async Task<IActionResult> Update(Data.Models.Activity activity)
+        public async Task<IActionResult> Update(Shared.Data.Models.Activity activity)
         {
 
-            bool isUpdated = await  _activityService.UpdateActivity(activity);
+            bool isUpdated = await _activityService.UpdateActivity(activity);
 
             return Ok(isUpdated);
         }
 
         // POST api/Activity/Create
         [HttpPost]
-        public async Task<IActionResult> Create(Data.Models.Activity activity)
+        public async Task<IActionResult> Create(Shared.Data.Models.Activity activity)
         {
 
             bool isCreated = await _activityService.CreateActivity(activity);

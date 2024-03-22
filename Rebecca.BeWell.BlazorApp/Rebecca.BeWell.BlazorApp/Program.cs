@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Rebecca.BeWell.BlazorApp.Client.Pages;
 using Rebecca.BeWell.BlazorApp.Components;
 using Rebecca.BeWell.BlazorApp.Components.Account;
-using Rebecca.BeWell.BlazorApp.Data;
+using Rebecca.BeWell.BlazorApp.Shared.Data;
 using Rebecca.BeWell.BlazorApp.Services.Interfaces;
 using Rebecca.BeWell.BlazorApp.Services;
 using Radzen;

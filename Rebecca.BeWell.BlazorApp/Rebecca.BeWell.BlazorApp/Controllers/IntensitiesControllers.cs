@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Rebecca.BeWell.BlazorApp.Data.Models;
+using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
 using Rebecca.BeWell.BlazorApp.Services;
 using Rebecca.BeWell.BlazorApp.Services.Interfaces;
 using System.Diagnostics;
@@ -24,7 +24,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetIntensityById(int Id)
         {
-            Data.Models.Intensity intensity = await _intensityService.GetIntensityById(Id);
+            Intensity intensity = await _intensityService.GetIntensityById(Id);
 
             return Ok(intensity);
         }
@@ -34,7 +34,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         public async Task<IActionResult> GetIntensities()
         {
-            List<Data.Models.Intensity> intensity = await _intensityService.GetIntensities();
+            List<Intensity> intensity = await _intensityService.GetIntensities();
 
             return Ok(intensity);
         }
@@ -43,7 +43,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         public async Task<IActionResult> GetIntensitiesByUserId(string userId)
         {
-            List<Data.Models.Intensity> intensity = await _intensityService.GetIntensitiesByUserId(userId);
+            List<Intensity> intensity = await _intensityService.GetIntensitiesByUserId(userId);
 
             return Ok(intensity);
         }
@@ -51,7 +51,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         // POST api/Intensity/Update
         [HttpPost]
-        public async Task<IActionResult> Update(Data.Models.Intensity intensity)
+        public async Task<IActionResult> Update(Intensity intensity)
         {
 
             bool isUpdated = await  _intensityService.UpdateIntensity(intensity);
@@ -61,7 +61,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         // POST api/Intensity/Create
         [HttpPost]
-        public async Task<IActionResult> Create(Data.Models.Intensity intensity)
+        public async Task<IActionResult> Create(Intensity intensity)
         {
 
             bool isCreated = await _intensityService.CreateIntensity(intensity);

@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Rebecca.BeWell.BlazorApp.Data.Models;
+using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
 
-namespace Rebecca.BeWell.BlazorApp.Data
+namespace Rebecca.BeWell.BlazorApp.Shared.Data
 {
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
     {
@@ -10,15 +10,15 @@ namespace Rebecca.BeWell.BlazorApp.Data
 
         public virtual DbSet<Activity> Activities { get; set; }
 
-        public virtual DbSet<ActivityType>ActivityTypes { get; set; }
+        public virtual DbSet<ActivityType> ActivityTypes { get; set; }
 
         public virtual DbSet<Intensity> Intensities { get; set; }
 
         public virtual DbSet<Sleep> Sleeps { get; set; }
 
-        public virtual DbSet<Nutrition> Nutritions { get; set;}
+        public virtual DbSet<Nutrition> Nutritions { get; set; }
 
-        public virtual DbSet<NutritionType> NutritionTypes { get; set;}
+        public virtual DbSet<NutritionType> NutritionTypes { get; set; }
 
     }
 }

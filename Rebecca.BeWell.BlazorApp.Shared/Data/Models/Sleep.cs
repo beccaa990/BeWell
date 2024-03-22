@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Rebecca.BeWell.BlazorApp.Data.Models
+namespace Rebecca.BeWell.BlazorApp.Shared.Data.Models
 {
     public class Sleep
     {
@@ -9,7 +9,7 @@ namespace Rebecca.BeWell.BlazorApp.Data.Models
 
         public int Mins { get; set; }
 
-        public DateTime TimeStamp { get; set; } 
+        public DateTime TimeStamp { get; set; }
 
         public string? Description { get; set; }
     }

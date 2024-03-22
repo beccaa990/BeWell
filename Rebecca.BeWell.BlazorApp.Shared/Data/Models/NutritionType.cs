@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Rebecca.BeWell.BlazorApp.Data.Models
+namespace Rebecca.BeWell.BlazorApp.Shared.Data.Models
 {
-    public class ActivityType
+    public class NutritionType
     {
         [Key]
         public int Id { get; set; }
-
         public string Name { get; set; }
+
+
 
     }
 }

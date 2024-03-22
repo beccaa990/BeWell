@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Rebecca.BeWell.BlazorApp.Shared\Rebecca.BeWell.BlazorApp.Shared.csproj" />
     <ProjectReference Include="..\Rebecca.BeWell.BlazorApp.Client\Rebecca.BeWell.BlazorApp.Client.csproj" />
     <PackageReference Include="Blazor.Bootstrap" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.2" />

@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rebecca.BeWell.BlazorApp", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rebecca.BeWell.BlazorApp.Client", "Rebecca.BeWell.BlazorApp\Rebecca.BeWell.BlazorApp.Client\Rebecca.BeWell.BlazorApp.Client.csproj", "{7030D13A-1A46-41FB-91D7-2B914CB53773}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rebecca.BeWell.BlazorApp.Shared", "Rebecca.BeWell.BlazorApp.Shared\Rebecca.BeWell.BlazorApp.Shared.csproj", "{741D5829-D92D-493A-9704-DBE3C0E1BDFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7030D13A-1A46-41FB-91D7-2B914CB53773}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7030D13A-1A46-41FB-91D7-2B914CB53773}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7030D13A-1A46-41FB-91D7-2B914CB53773}.Release|Any CPU.Build.0 = Release|Any CPU
+		{741D5829-D92D-493A-9704-DBE3C0E1BDFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{741D5829-D92D-493A-9704-DBE3C0E1BDFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{741D5829-D92D-493A-9704-DBE3C0E1BDFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{741D5829-D92D-493A-9704-DBE3C0E1BDFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

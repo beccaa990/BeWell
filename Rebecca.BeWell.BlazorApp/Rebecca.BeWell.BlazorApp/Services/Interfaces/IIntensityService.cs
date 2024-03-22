@@ -1,4 +1,4 @@
-﻿using Rebecca.BeWell.BlazorApp.Data.Models;
+﻿using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
 
 namespace Rebecca.BeWell.BlazorApp.Services.Interfaces
 {
@@ -9,6 +9,6 @@ namespace Rebecca.BeWell.BlazorApp.Services.Interfaces
         Task<Intensity?> GetIntensityById(int Id);
         Task<List<Intensity>?> GetIntensitiesByUserId(string UserId);
         Task<bool> UpdateIntensity(Intensity intensity);
-        Task<List<Intensity>?> GetIntensities()
+        Task<List<Intensity>?> GetIntensities();
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Radzen.Blazor.Rendering;
 using Radzen;
+using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
+using System.Net.Http.Json;
 
 namespace Rebecca.BeWell.BlazorApp.Client.Pages
 {
@@ -29,7 +31,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
 
             List<Intensity>? activityTypes = await Http.GetFromJsonAsync<List<Intensity>?>("api/Intensities/GetIntensities");
-            model.ActivityTypes = Http = ActivityTypes.Select(i => i.Name);
+            model.ActivityTypes = activityTypes.Select(i => i.Name).ToList();
 
 
             model.NutritionTypes = new List<string>

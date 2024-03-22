@@ -1,4 +1,4 @@
-﻿using Rebecca.BeWell.BlazorApp.Data.Models;
+﻿using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
 
 namespace Rebecca.BeWell.BlazorApp.Services.Interfaces
 {

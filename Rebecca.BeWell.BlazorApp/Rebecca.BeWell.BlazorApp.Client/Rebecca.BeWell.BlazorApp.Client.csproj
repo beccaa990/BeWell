@@ -15,4 +15,8 @@
     <PackageReference Include="Radzen.Blazor" Version="4.28.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Rebecca.BeWell.BlazorApp.Shared\Rebecca.BeWell.BlazorApp.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
