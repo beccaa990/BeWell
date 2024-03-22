@@ -18,6 +18,7 @@ builder.Services.AddScoped(sp =>
     });
 
 
+
 builder.Services.AddRadzenComponents();
 
 await builder.Build().RunAsync();

@@ -20,7 +20,8 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-
+            model.Types= new List<string>
+            { "Activity", "Nutrition", "Sleep"  };
 
 
         }
@@ -34,6 +35,13 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         private void OnSubmit()
         {
             DialogService.Close(model);
+        }
+
+        void OnTypeChange(object value)
+        {
+            //var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+
+            model.SelectedType = (string)value;
         }
 
     }

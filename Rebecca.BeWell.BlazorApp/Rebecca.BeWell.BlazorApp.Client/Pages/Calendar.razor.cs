@@ -2,9 +2,12 @@
 using Radzen.Blazor;
 using Radzen;
 using Radzen.Blazor.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Rebecca.BeWell.BlazorApp.Client.Pages
 {
+    [Authorize]
+
     public partial class Calendar: ComponentBase
 
     {
@@ -16,13 +19,13 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
         IList<Rebecca.BeWell.BlazorApp.Client.Model.Appointment> appointments = new List<Rebecca.BeWell.BlazorApp.Client.Model.Appointment>
     {
-        new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddDays(-2), End = DateTime.Today.AddDays(-2), Text = "Birthday" },
-        new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddDays(-11), End = DateTime.Today.AddDays(-10), Text = "Day off" },
-        new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddDays(-10), End = DateTime.Today.AddDays(-8), Text = "Work from home" },
-        new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddHours(10), End = DateTime.Today.AddHours(12), Text = "Online meeting" },
-        new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddHours(10), End = DateTime.Today.AddHours(13), Text = "Skype call" },
-        new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddHours(14), End = DateTime.Today.AddHours(14).AddMinutes(30), Text = "Dentist appointment" },
-        new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddDays(1), End = DateTime.Today.AddDays(12), Text = "Vacation" },
+    ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddDays(-2), End = DateTime.Today.AddDays(-2), Text = "Birthday" },
+    ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddDays(-11), End = DateTime.Today.AddDays(-10), Text = "Day off" },
+    ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddDays(-10), End = DateTime.Today.AddDays(-8), Text = "Work from home" },
+    ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddHours(10), End = DateTime.Today.AddHours(12), Text = "Online meeting" },
+    ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddHours(10), End = DateTime.Today.AddHours(13), Text = "Skype call" },
+    ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddHours(14), End = DateTime.Today.AddHours(14).AddMinutes(30), Text = "Dentist appointment" },
+    ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddDays(1), End = DateTime.Today.AddDays(12), Text = "Vacation" },
     };
 
         protected override async Task OnInitializedAsync()
