@@ -12,7 +12,16 @@
         </div>
     </div>
     @if (model.SelectedType=="Activity")
-    {   
+    {
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
+                <RadzenLabel Text="Type" />
+            </div>
+            <div class="col">
+                <RadzenDropDown Name="ActivityType" Placeholder="Please Select" TValue="string" Data="model.ActivityTypes" Change="@OnActivityTypeChange" />
+                <RadzenRequiredValidator Text="Title is required" Component="ActivityType" />
+            </div>
+        </div>
         <div class="row" style="margin-bottom: 16px">
             <div class="col-md-3">
                 <RadzenLabel Text="Text" />
@@ -51,6 +60,15 @@
     {
         <div class="row" style="margin-bottom: 16px">
             <div class="col-md-3">
+                <RadzenLabel Text="Type" />
+            </div>
+            <div class="col">
+                <RadzenDropDown Name="NutritionType" Placeholder="Please Select" TValue="string" Data="model.NutritionTypes" Change="@OnNutritionTypeChange" />
+                <RadzenRequiredValidator Text="Title is required" Component="NutritionType" />
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
                 <RadzenLabel Text="Text" />
             </div>
             <div class="col">
@@ -85,6 +103,15 @@
     }
     @if (model.SelectedType == "Sleep")
     {
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
+                <RadzenLabel Text="Type" />
+            </div>
+            <div class="col">
+                <RadzenDropDown Name="SleepType" Placeholder="Please Select" TValue="string" Data="model.SleepTypes" Change="@OnSleepTypeChange" />
+                <RadzenRequiredValidator Text="Title is required" Component="SleepType" />
+            </div>
+        </div>
         <div class="row" style="margin-bottom: 16px">
             <div class="col-md-3">
                 <RadzenLabel Text="Text" />

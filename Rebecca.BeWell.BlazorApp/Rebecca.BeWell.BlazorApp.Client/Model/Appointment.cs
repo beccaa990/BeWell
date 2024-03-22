@@ -9,5 +9,17 @@
         public List<string> Types { get; set; }
 
         public string SelectedType { get; set; }
+
+        public List<string> ActivityTypes { get; set; }
+
+        public string SelectedActivityType { get; set; }
+
+        public List<string> NutritionTypes { get; set; }
+
+        public string SelectedNutritionType { get; set; }
+
+        public List<string> SleepTypes { get; set; }
+
+        public string SelectedSleepType { get; set; }
     }
 }

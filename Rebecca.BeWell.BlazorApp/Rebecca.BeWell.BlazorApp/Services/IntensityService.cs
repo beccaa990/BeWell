@@ -24,6 +24,14 @@ namespace Rebecca.BeWell.BlazorApp.Services
 
         }
 
+        public async Task<List<Intensity>?> GetIntensities()
+        {
+
+            List<Intensity?> intensities = await _context.Intensities.ToListAsync();
+
+            return intensities;
+
+        }
 
         public async Task<List<Intensity?>> GetIntensities(int Id)
         {

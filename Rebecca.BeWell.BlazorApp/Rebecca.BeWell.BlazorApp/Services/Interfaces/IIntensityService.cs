@@ -9,5 +9,6 @@ namespace Rebecca.BeWell.BlazorApp.Services.Interfaces
         Task<Intensity?> GetIntensityById(int Id);
         Task<List<Intensity>?> GetIntensitiesByUserId(string UserId);
         Task<bool> UpdateIntensity(Intensity intensity);
+        Task<List<Intensity>?> GetIntensities()
     }
 }

@@ -30,6 +30,15 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
         }
 
 
+        [HttpGet]
+
+        public async Task<IActionResult> GetIntensities()
+        {
+            List<Data.Models.Intensity> intensity = await _intensityService.GetIntensities();
+
+            return Ok(intensity);
+        }
+
         [HttpGet("user/{userid}")]
 
         public async Task<IActionResult> GetIntensitiesByUserId(string userId)
