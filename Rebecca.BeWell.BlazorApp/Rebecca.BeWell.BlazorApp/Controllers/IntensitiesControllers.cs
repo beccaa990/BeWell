@@ -30,7 +30,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("GetIntensities")]
 
         public async Task<IActionResult> GetIntensities()
         {

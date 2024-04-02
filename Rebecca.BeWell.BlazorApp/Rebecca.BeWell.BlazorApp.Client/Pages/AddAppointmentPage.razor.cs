@@ -6,6 +6,7 @@ using System.Net.Http.Json;
 
 namespace Rebecca.BeWell.BlazorApp.Client.Pages
 {
+
     public partial class AddAppointmentPage : ComponentBase
     {
 
@@ -48,7 +49,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
             model.End = End;
         }
 
-        private void OnSubmit()
+        private void OnSubmit(Rebecca.BeWell.BlazorApp.Shared.Models.Appointment model)
         {
             DialogService.Close(model);
         }
