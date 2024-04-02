@@ -15,6 +15,24 @@ namespace Rebecca.BeWell.BlazorApp.Services
         }
 
 
+        public async Task<List<Activity>?> GetActivities()
+        {
+
+            List<Activity?> activity = await _context.Activities.ToListAsync();
+
+            return activity;
+
+        }
+        public async Task<List<ActivityType>?> GetActivityTypes()
+        {
+
+            List<ActivityType?> activityTypes = await _context.ActivityTypes.ToListAsync();
+
+            return activityTypes;
+
+        }
+
+
         public async Task<Activity?> GetActivityById(int Id)
         {
 
@@ -38,17 +56,16 @@ namespace Rebecca.BeWell.BlazorApp.Services
             try
             {
 
+                ActivityType activityType = await _context.ActivityTypes.SingleOrDefaultAsync(a => a.Name == activity.ActivityType.Name);
+                activity.ActivityType = activityType;
+
                 _context.Activities.Add(activity);
                 await _context.SaveChangesAsync();
 
-
                 return true;
-
             }
             catch (Exception ex)
             {
-
-
                 return false;
             }
         }
@@ -65,12 +82,9 @@ namespace Rebecca.BeWell.BlazorApp.Services
                 a.TimeStamp = activity.TimeStamp;
                 a.Intensity = a.Intensity;
 
-
                 await _context.SaveChangesAsync();
 
-
                 return true;
-
             }
             catch (Exception ex)
             {

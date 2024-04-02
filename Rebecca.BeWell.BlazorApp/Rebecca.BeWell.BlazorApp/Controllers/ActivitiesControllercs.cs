@@ -21,6 +21,26 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
         }
 
 
+        [HttpGet("GetActivities")]
+
+        public async Task<IActionResult> GetActivities()
+        {
+            List< Shared.Data.Models.Activity> activities = await _activityService.GetActivities();
+
+            return Ok(activities);
+        }
+
+        [HttpGet("GetActivityTypes")]
+
+        public async Task<IActionResult> GetActivityTypes()
+        {
+            List<Shared.Data.Models.ActivityType> activityTypes = await _activityService.GetActivityTypes();
+
+            return Ok(activityTypes.OrderBy(o => o.Name));
+
+
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetActivityById(int Id)
         {

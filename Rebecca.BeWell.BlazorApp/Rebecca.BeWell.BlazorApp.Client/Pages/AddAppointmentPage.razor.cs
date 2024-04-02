@@ -3,6 +3,8 @@ using Radzen.Blazor.Rendering;
 using Radzen;
 using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
 using System.Net.Http.Json;
+using System.Diagnostics;
+using Activity = Rebecca.BeWell.BlazorApp.Shared.Data.Models.Activity;
 
 namespace Rebecca.BeWell.BlazorApp.Client.Pages
 {
@@ -24,6 +26,8 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         
          [Inject]
          HttpClient Http  { get; set; }
+
+        
         
         protected override async Task OnInitializedAsync()
         {
@@ -31,15 +35,18 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
             { "Activity", "Nutrition", "Sleep"  };
 
 
-            List<Intensity>? activityTypes = await Http.GetFromJsonAsync<List<Intensity>?>("api/Intensities/GetIntensities");
+            List<ActivityType>? activityTypes = await Http.GetFromJsonAsync<List<ActivityType>?>("api/Activities/GetActivityTypes");
             model.ActivityTypes = activityTypes.Select(i => i.Name).ToList();
+
+
+            List<Intensity>? intensityTypes = await Http.GetFromJsonAsync<List<Intensity>?>("api/Intensities/GetIntensities");
+            model.ActivityTypes = intensityTypes.Select(i => i.Name).ToList();
+
 
 
             model.NutritionTypes = new List<string>
             { "Activity", "Nutrition", "Sleep"  };
-            
-            model.SleepTypes= new List<string>
-            { "Activity", "Nutrition", "Sleep"  };
+           
 
         }
 
@@ -49,9 +56,67 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
             model.End = End;
         }
 
-        private void OnSubmit(Rebecca.BeWell.BlazorApp.Shared.Models.Appointment model)
+        private async void OnSubmit(Rebecca.BeWell.BlazorApp.Shared.Models.Appointment model)
         {
-            DialogService.Close(model);
+           DialogService.Close(model);
+
+            if (model.SelectedType== "Activity")
+            {
+                Activity activity = new Activity();
+                activity.TimeStamp = DateTime.Now;
+                activity.ActivityType = new ActivityType()
+                {
+                    Name = model.SelectedActivityType
+                };
+                TimeSpan timeDifference = model.End  - model.Start;
+                activity.Mins= (int)Math.Round(timeDifference.TotalMinutes);
+
+                activity.Intensity = new Intensity()
+                {
+                    Name = model.SelectedIntensityType
+                };
+
+
+               await Http.PostAsJsonAsync<Activity>("api/Activities/Create", activity);
+
+
+                return;
+            }
+                   
+            if(model.SelectedType == "Nutrition")
+            {
+                Nutrition nutrition = new Nutrition();
+                nutrition.Name = model.Text;    
+                nutrition.TimeStamp = DateTime.Now;
+                nutrition.Calories = (int)Math.Round(model.TotalCalories) ;
+                nutrition.NutritionType = new NutritionType()
+                {
+                    Name = model.SelectedNutritionType
+                };
+                nutrition.NutritionType = new NutritionType()
+                {
+                    Name = model.SelectedNutritionType
+                };
+
+                await Http.PostAsJsonAsync<Nutrition>("api/Nutritions/Create", nutrition);
+
+                return;
+            }
+
+            if(model.SelectedType == "Sleep")
+            {
+                Sleep sleep = new Sleep();
+                sleep.TimeStamp = DateTime.Now;
+                sleep.Description = model.Text;
+                TimeSpan timeDifference = model.End - model.Start;
+                sleep.Mins = (int)Math.Round(timeDifference.TotalMinutes);
+
+
+                await Http.PostAsJsonAsync<Sleep>("api/Sleeps/Create", sleep);
+
+
+                return;
+            }
         }
 
         void OnTypeChange(object value)
@@ -82,5 +147,11 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
             model.SelectedActivityType = (string)value;
         }
 
+        void OnIntensityTypeChange(object value)
+        {
+            //var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+
+            model.SelectedIntensityType = (string)value;
+        }
     }
 }
