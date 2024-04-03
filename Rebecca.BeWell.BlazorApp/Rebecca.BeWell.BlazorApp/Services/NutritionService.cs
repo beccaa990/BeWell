@@ -13,6 +13,14 @@ namespace Rebecca.BeWell.BlazorApp.Services
             _context = context;
         }
 
+        public async Task<List<NutritionType>?> GetNutritionTypes()
+        {
+
+            List<NutritionType?> nutritionTypes = await _context.NutritionTypes.ToListAsync();
+
+            return nutritionTypes;
+
+        }
 
         public async Task<Nutrition?> GetNutritionById(int Id)
         {
@@ -22,6 +30,7 @@ namespace Rebecca.BeWell.BlazorApp.Services
             return nutrition;
 
         }
+
 
         public async Task<List<Nutrition>?> GetNutritionsByUserId(string UserId)
         {

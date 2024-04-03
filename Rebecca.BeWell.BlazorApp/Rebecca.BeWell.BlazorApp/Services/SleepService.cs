@@ -28,6 +28,7 @@ namespace Rebecca.BeWell.BlazorApp.Services
             return profile?.Sleeps;
 
         }
+
         public async Task<bool> CreateSleep(Sleep sleep)
         {
             try

@@ -31,6 +31,8 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         
         protected override async Task OnInitializedAsync()
         {
+            model.Start = DateTime.Now;
+
             model.Types= new List<string>
             { "Activity", "Nutrition", "Sleep"  };
 
@@ -40,20 +42,20 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
 
             List<Intensity>? intensityTypes = await Http.GetFromJsonAsync<List<Intensity>?>("api/Intensities/GetIntensities");
-            model.ActivityTypes = intensityTypes.Select(i => i.Name).ToList();
+            model.IntensityTypes = intensityTypes.Select(i => i.Name).ToList();
 
+            List<NutritionType>? nutritionTypes = await Http.GetFromJsonAsync<List<NutritionType>?>("api/Nutritions/GetNutritionTypes");
+            model.NutritionTypes = nutritionTypes.Select(i => i.Name).ToList();
 
-
-            model.NutritionTypes = new List<string>
-            { "Activity", "Nutrition", "Sleep"  };
+            //{ "Activity", "Nutrition", "Sleep"  };
            
 
         }
 
         protected override void OnParametersSet()
         {
-            model.Start = Start;
-            model.End = End;
+            model.Start = DateTime.Now;
+            model.End = DateTime.Now.AddHours(1);
         }
 
         private async void OnSubmit(Rebecca.BeWell.BlazorApp.Shared.Models.Appointment model)
@@ -88,7 +90,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                 Nutrition nutrition = new Nutrition();
                 nutrition.Name = model.Text;    
                 nutrition.TimeStamp = DateTime.Now;
-                nutrition.Calories = (int)Math.Round(model.TotalCalories) ;
+                nutrition.Calories = model.Calories;
                 nutrition.NutritionType = new NutritionType()
                 {
                     Name = model.SelectedNutritionType

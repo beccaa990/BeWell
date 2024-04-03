@@ -9,5 +9,7 @@ namespace Rebecca.BeWell.BlazorApp.Services.Interfaces
         Task<Nutrition?> GetNutritionById(int Id);
         Task<List<Nutrition>?> GetNutritionsByUserId(string UserId);
         Task<bool> UpdateNutrition(Nutrition nutrition);
+        Task<List<NutritionType>?> GetNutritionTypes();
+
     }
 }

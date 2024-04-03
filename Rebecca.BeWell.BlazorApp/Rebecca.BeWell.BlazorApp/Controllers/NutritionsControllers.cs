@@ -39,6 +39,16 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
             return Ok(nutrition);
         }
 
+        [HttpGet("GetNutritionTypes")]
+
+        public async Task<IActionResult> GetNutritionTypes()
+        {
+            List<Shared.Data.Models.NutritionType> nutritionTypes = await _nutritionService.GetNutritionTypes();
+
+            return Ok(nutritionTypes.OrderBy(o => o.Name));
+
+
+        }   
 
         // POST api/Activity/Update
         [HttpPost]
