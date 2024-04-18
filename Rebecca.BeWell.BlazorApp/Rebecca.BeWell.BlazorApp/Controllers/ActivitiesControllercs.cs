@@ -65,7 +65,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
 
         // POST api/Activity/Update
-        [HttpPost]
+        [HttpPost("update")]
         public async Task<IActionResult> Update(Shared.Data.Models.Activity activity)
         {
 
@@ -75,7 +75,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
         }
 
         // POST api/Activity/Create
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> Create(Shared.Data.Models.Activity activity)
         {
 

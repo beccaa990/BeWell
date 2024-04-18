@@ -3,6 +3,8 @@ using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
 using Rebecca.BeWell.BlazorApp.Services;
 using Rebecca.BeWell.BlazorApp.Services.Interfaces;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
+using Rebecca.BeWell.BlazorApp.Shared.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,11 +17,13 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
     private readonly IProfileService _profileService;
 
-        public ProfilesController(IProfileService profileService)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public ProfilesController(IProfileService profileService, UserManager<ApplicationUser> userManager)
         {
             _profileService = profileService;
+            _userManager = userManager;
         }
-
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProfileById(int Id)
@@ -39,6 +43,20 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
             return Ok(profile);
         }
 
+
+        [HttpGet("user/current")]
+
+        public async Task<IActionResult> GetProfilesByCurrentUser()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name); 
+
+            Profile profile = await _profileService.GetProfileByUserId(user.Id);
+
+
+
+
+            return Ok(profile);
+        }
 
         // POST api/Activity/Update
         [HttpPost]

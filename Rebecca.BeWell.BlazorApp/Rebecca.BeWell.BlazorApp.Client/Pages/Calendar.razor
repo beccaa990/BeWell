@@ -1,6 +1,6 @@
 ﻿@using Rebecca.BeWell.BlazorApp.Shared.Models
 @page "/calendar"
-@rendermode InteractiveWebAssembly
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
 
 
 <PageTitle>Calendar</PageTitle>

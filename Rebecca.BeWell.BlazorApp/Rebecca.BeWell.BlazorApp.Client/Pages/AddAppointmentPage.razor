@@ -37,7 +37,7 @@
             </div>
             <div class="col">
                 <RadzenTextArea @bind-Value="@model.Text" Name="Description" />
-                <RadzenRequiredValidator Text="Title is required" Component="Text" />
+                <RadzenRequiredValidator Text="Title is required" Component="Description" />
             </div>
         </div>
         <div class="row" style="margin-bottom: 16px">
@@ -82,7 +82,7 @@
             </div>
             <div class="col">
                 <RadzenTextArea @bind-Value="@model.Text" Name="Description" />
-                <RadzenRequiredValidator Text="Title is required" Component="Text" />
+                <RadzenRequiredValidator Text="Title is required" Component="Description" />
             </div>
         </div>
         <div class="row" style="margin-bottom: 16px">
@@ -112,23 +112,14 @@
         </div>
     }
     @if (model.SelectedType == "Sleep")
-    {@*
-    <div class="row" style="margin-bottom: 16px">
-    <div class="col-md-3">
-    <RadzenLabel Text="Type" />
-    </div>
-    <div class="col">
-    <RadzenDropDown Name="SleepType" Placeholder="Please Select" TValue="string" Data="model.SleepTypes" Change="@OnSleepTypeChange" />
-    <RadzenRequiredValidator Text="Title is required" Component="SleepType" />
-    </div>
-    </div> *@
+    {
         <div class="row" style="margin-bottom: 16px">
             <div class="col-md-3">
                 <RadzenLabel Text="Description" />
             </div>
             <div class="col">
                 <RadzenTextArea @bind-Value="@model.Text" Name="Description" />
-                <RadzenRequiredValidator Text="Title is required" Component="Text" />
+                <RadzenRequiredValidator Text="Title is required" Component="Description" />
             </div>
         </div>
         <div class="row" style="margin-bottom: 16px">

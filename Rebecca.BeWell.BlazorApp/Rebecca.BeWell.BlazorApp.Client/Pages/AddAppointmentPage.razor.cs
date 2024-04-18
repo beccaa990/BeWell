@@ -19,21 +19,19 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         public DateTime End { get; set; }
 
 
-        Shared.Models.Appointment model = new Rebecca.BeWell.BlazorApp.Shared.Models.Appointment();
-        
-        [Inject]
-        DialogService DialogService { get; set; }
-        
-         [Inject]
-         HttpClient Http  { get; set; }
+        public Shared.Models.Appointment model = new Rebecca.BeWell.BlazorApp.Shared.Models.Appointment();
 
-        
-        
+        [Inject]
+        public DialogService DialogService { get; set; }
+
+        [Inject]
+        public HttpClient Http { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             model.Start = DateTime.Now;
 
-            model.Types= new List<string>
+            model.Types = new List<string>
             { "Activity", "Nutrition", "Sleep"  };
 
 
@@ -48,7 +46,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
             model.NutritionTypes = nutritionTypes.Select(i => i.Name).ToList();
 
             //{ "Activity", "Nutrition", "Sleep"  };
-           
+
 
         }
 
@@ -60,9 +58,9 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
         private async void OnSubmit(Rebecca.BeWell.BlazorApp.Shared.Models.Appointment model)
         {
-           DialogService.Close(model);
+            DialogService.Close(model);
 
-            if (model.SelectedType== "Activity")
+            if (model.SelectedType == "Activity")
             {
                 Activity activity = new Activity();
                 activity.TimeStamp = DateTime.Now;
@@ -70,8 +68,8 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                 {
                     Name = model.SelectedActivityType
                 };
-                TimeSpan timeDifference = model.End  - model.Start;
-                activity.Mins= (int)Math.Round(timeDifference.TotalMinutes);
+                TimeSpan timeDifference = model.End - model.Start;
+                activity.Mins = (int)Math.Round(timeDifference.TotalMinutes);
 
                 activity.Intensity = new Intensity()
                 {
@@ -79,16 +77,16 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                 };
 
 
-               await Http.PostAsJsonAsync<Activity>("api/Activities/Create", activity);
+                await Http.PostAsJsonAsync<Activity>("api/Activities/Create", activity);
 
 
                 return;
             }
-                   
-            if(model.SelectedType == "Nutrition")
+
+            if (model.SelectedType == "Nutrition")
             {
                 Nutrition nutrition = new Nutrition();
-                nutrition.Name = model.Text;    
+                nutrition.Name = model.Text;
                 nutrition.TimeStamp = DateTime.Now;
                 nutrition.Calories = model.Calories;
                 nutrition.NutritionType = new NutritionType()
@@ -105,7 +103,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                 return;
             }
 
-            if(model.SelectedType == "Sleep")
+            if (model.SelectedType == "Sleep")
             {
                 Sleep sleep = new Sleep();
                 sleep.TimeStamp = DateTime.Now;

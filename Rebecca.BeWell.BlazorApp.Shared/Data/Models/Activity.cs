@@ -14,13 +14,5 @@ namespace Rebecca.BeWell.BlazorApp.Shared.Data.Models
         public virtual Intensity Intensity { get; set; }
 
         public DateTime TimeStamp { get; set; }
-
-
-
-
-
-
-
-
     }
 }
