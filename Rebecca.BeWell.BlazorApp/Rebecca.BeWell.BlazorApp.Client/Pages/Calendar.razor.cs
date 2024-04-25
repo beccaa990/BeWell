@@ -23,25 +23,34 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         public System.Net.Http.HttpClient Http { get; set; }
 
 
-        public IList<Appointment> appointments = new List<Shared.Models.Appointment>
+        public IList<Shared.Models.Appointment> appointments = new List<Shared.Models.Appointment>()
         {
-            ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddDays(-2), End = DateTime.Today.AddDays(-2), Text = "Birthday" },
-            ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddDays(-11), End = DateTime.Today.AddDays(-10), Text = "Day off" },
-            ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddDays(-10), End = DateTime.Today.AddDays(-8), Text = "Work from home" },
-            ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddHours(10), End = DateTime.Today.AddHours(12), Text = "Online meeting" },
-            ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddHours(10), End = DateTime.Today.AddHours(13), Text = "Skype call" },
-            ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddHours(14), End = DateTime.Today.AddHours(14).AddMinutes(30), Text = "Dentist appointment" },
-            ////    new Rebecca.BeWell.BlazorApp.Client.Model.Appointment { Start = DateTime.Today.AddDays(1), End = DateTime.Today.AddDays(12), Text = "Vacation" },
+            //new Shared.Models.Appointment { Start = DateTime.Today.AddDays(-2), End = DateTime.Today.AddDays(-2), Text = "Birthday" },
+            //new Shared.Models.Appointment { Start = DateTime.Today.AddDays(-11), End = DateTime.Today.AddDays(-10), Text = "Day off" },
+            //new Shared.Models.Appointment { Start = DateTime.Today.AddDays(-10), End = DateTime.Today.AddDays(-8), Text = "Work from home" },
+            //new Shared.Models.Appointment { Start = DateTime.Today.AddHours(10), End = DateTime.Today.AddHours(12), Text = "Online meeting" },
+            //new Shared.Models.Appointment { Start = DateTime.Today.AddHours(10), End = DateTime.Today.AddHours(13), Text = "Skype call" },
+            //new Shared.Models.Appointment { Start = DateTime.Today.AddHours(14), End = DateTime.Today.AddHours(14).AddMinutes(30), Text = "Dentist appointment" },
+            //new Shared.Models.Appointment { Start = DateTime.Today.AddDays(1), End = DateTime.Today.AddDays(12), Text = "Vacation" },
         };
 
         protected override async Task OnInitializedAsync()
         {
             Rebecca.BeWell.BlazorApp.Shared.Data.Models.Profile profile = await Http.GetFromJsonAsync<Rebecca.BeWell.BlazorApp.Shared.Data.Models.Profile>("api/Profiles/user/current");
 
-            appointments = profile.Activities.Select(a = new Appointment()
-                st
+            appointments = profile.Activities.Select(a => new Shared.Models.Appointment()
+            {
+                Text = a?.ActivityType?.Name,
+                Start = a.Start,
+                End = a.End,
 
-                ).
+
+            }).ToList();
+
+
+
+
+
 
         }
         void OnSlotRender(SchedulerSlotRenderEventArgs args)

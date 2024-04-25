@@ -7,6 +7,8 @@ namespace Rebecca.BeWell.BlazorApp.Shared.Data.Models
         [Key]
         public int Id { get; set; }
 
+
+
         public virtual ActivityType ActivityType { get; set; }
 
         public int Mins { get; set; }
@@ -14,5 +16,8 @@ namespace Rebecca.BeWell.BlazorApp.Shared.Data.Models
         public virtual Intensity Intensity { get; set; }
 
         public DateTime TimeStamp { get; set; }
+
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
     }
 }

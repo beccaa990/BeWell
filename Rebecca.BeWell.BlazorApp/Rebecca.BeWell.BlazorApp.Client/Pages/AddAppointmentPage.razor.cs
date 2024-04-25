@@ -76,6 +76,8 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                     Name = model.SelectedIntensityType
                 };
 
+                activity.Start = DateTime.Now;
+                activity.End = DateTime.Now.AddHours(1);
 
                 await Http.PostAsJsonAsync<Activity>("api/Activities/Create", activity);
 

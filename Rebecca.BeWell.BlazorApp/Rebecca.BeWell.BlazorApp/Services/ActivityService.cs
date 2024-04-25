@@ -81,6 +81,8 @@ namespace Rebecca.BeWell.BlazorApp.Services
                 a.Intensity = activity.Intensity;
                 a.TimeStamp = activity.TimeStamp;
                 a.Intensity = a.Intensity;
+                a.Start = activity.Start;
+                a.End = activity.End;
 
                 await _context.SaveChangesAsync();
 
