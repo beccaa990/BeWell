@@ -57,10 +57,9 @@ namespace Rebecca.BeWell.BlazorApp.Services
                 a.UserID = a.UserID;
                 a.Weight = profile.Weight;
                 a.Height= profile.Height;
-                //a.Intensity = a.Intensities;
-                //a.Activity = a.Activities;
-                //a.Nutrition = a.Nutritions;
-                //a.Sleep = a.Sleeps;
+                a.Activities = a.Activities;
+                a.Nutritions = a.Nutritions;
+                a.Sleeps = a.Sleeps;
 
 
                 await _context.SaveChangesAsync();

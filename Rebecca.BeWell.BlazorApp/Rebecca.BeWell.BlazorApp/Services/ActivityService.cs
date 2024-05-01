@@ -8,10 +8,12 @@ namespace Rebecca.BeWell.BlazorApp.Services
     public class ActivityService : IActivityService
     {
         private ApplicationDbContext _context;
+        private IProfileService _profileService;
 
-        public ActivityService(ApplicationDbContext context)
+        public ActivityService(ApplicationDbContext context, IProfileService profileService)
         {
             _context = context;
+            _profileService = profileService;
         }
 
 
@@ -51,13 +53,20 @@ namespace Rebecca.BeWell.BlazorApp.Services
 
         }
 
-        public async Task<bool> CreateActivity(Activity activity)
+        public async Task<bool> CreateActivity(Activity activity, string userID)
         {
             try
             {
-
                 ActivityType activityType = await _context.ActivityTypes.SingleOrDefaultAsync(a => a.Name == activity.ActivityType.Name);
                 activity.ActivityType = activityType;
+
+                Profile profile = await _profileService.GetProfileByUserId(userID);
+
+                List<Activity> activities = profile.Activities;
+
+                activities.Add(activity);
+
+                profile.Activities = activities;
 
                 _context.Activities.Add(activity);
                 await _context.SaveChangesAsync();

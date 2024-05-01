@@ -3,6 +3,7 @@ using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
 using Rebecca.BeWell.BlazorApp.Services;
 using Rebecca.BeWell.BlazorApp.Services.Interfaces;
 using System.Diagnostics;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -79,7 +80,9 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
         public async Task<IActionResult> Create(Shared.Data.Models.Activity activity)
         {
 
-            bool isCreated = await _activityService.CreateActivity(activity);
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            bool isCreated = await _activityService.CreateActivity(activity, userId);
 
             return Ok(isCreated);
         }
@@ -87,7 +90,7 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
 
         // DELETE api/<ActivitiesControllercs>/5
         [HttpGet("delete/{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id)                                                 
         {
             bool isDelete = await _activityService.DeleteActivity(id);
 

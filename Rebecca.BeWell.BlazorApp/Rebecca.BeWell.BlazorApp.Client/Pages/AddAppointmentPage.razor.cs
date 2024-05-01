@@ -71,10 +71,14 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                 TimeSpan timeDifference = model.End - model.Start;
                 activity.Mins = (int)Math.Round(timeDifference.TotalMinutes);
 
-                activity.Intensity = new Intensity()
-                {
-                    Name = model.SelectedIntensityType
-                };
+                activity.Intensity = await Http.GetFromJsonAsync<Intensity>($"api/GetIntensityByName/{model.SelectedIntensityType}");
+                //activity.Intensity = new Intensity()
+                //{
+                //    Name = model.SelectedIntensityType
+                //};
+
+
+
 
                 activity.Start = DateTime.Now;
                 activity.End = DateTime.Now.AddHours(1);
