@@ -29,7 +29,9 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            model.Start = DateTime.Now;
+            model.Start = Start.AddHours(DateTime.Now.Hour);
+            model.Start = model.Start.AddHours(1);
+            model.End =model.Start.AddHours(1);
 
             model.Types = new List<string>
             { "Activity", "Nutrition", "Sleep"  };
@@ -52,8 +54,8 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
         protected override void OnParametersSet()
         {
-            model.Start = DateTime.Now;
-            model.End = DateTime.Now.AddHours(1);
+            //model.Start = DateTime.Now;
+           
         }
 
         private async void OnSubmit(Rebecca.BeWell.BlazorApp.Shared.Models.Appointment model)
@@ -71,17 +73,13 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                 TimeSpan timeDifference = model.End - model.Start;
                 activity.Mins = (int)Math.Round(timeDifference.TotalMinutes);
 
-                activity.Intensity = await Http.GetFromJsonAsync<Intensity>($"api/GetIntensityByName/{model.SelectedIntensityType}");
-                //activity.Intensity = new Intensity()
-                //{
-                //    Name = model.SelectedIntensityType
-                //};
+                activity.Intensity = await Http.GetFromJsonAsync<Intensity>($"api/Intensities/GetIntensityByName/{model.SelectedIntensityType}");
+              
 
 
 
-
-                activity.Start = DateTime.Now;
-                activity.End = DateTime.Now.AddHours(1);
+                activity.Start = model.Start;
+                activity.End = model.End;
 
                 await Http.PostAsJsonAsync<Activity>("api/Activities/Create", activity);
 
@@ -92,19 +90,16 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
             if (model.SelectedType == "Nutrition")
             {
                 Nutrition nutrition = new Nutrition();
-                nutrition.Name = model.Text;
+                nutrition.Description = model.Text;
+                nutrition.Start = model.Start;
                 nutrition.TimeStamp = DateTime.Now;
                 nutrition.Calories = model.Calories;
                 nutrition.NutritionType = new NutritionType()
                 {
                     Name = model.SelectedNutritionType
                 };
-                nutrition.NutritionType = new NutritionType()
-                {
-                    Name = model.SelectedNutritionType
-                };
 
-                await Http.PostAsJsonAsync<Nutrition>("api/Nutritions/Create", nutrition);
+                await Http.PostAsJsonAsync<Nutrition>("api/Nutritions/create", nutrition);
 
                 return;
             }
@@ -143,14 +138,14 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         {
             //var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
 
-            model.SelectedActivityType = (string)value;
+            model.SelectedNutritionType = (string)value;
         }
 
         void OnSleepTypeChange(object value)
         {
             //var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
 
-            model.SelectedActivityType = (string)value;
+            model.SelectedSleepType = (string)value;
         }
 
         void OnIntensityTypeChange(object value)

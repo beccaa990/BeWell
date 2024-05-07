@@ -18,9 +18,9 @@
 
         public string SelectedNutritionType { get; set; }
 
-        //public List<string> SleepTypes { get; set; }
+        public List<string> SleepTypes { get; set; }
 
-        //public string SelectedSleepType { get; set; }
+        public string SelectedSleepType { get; set; }
 
         public List<string> IntensityTypes { get; set; }
 

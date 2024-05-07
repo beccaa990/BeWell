@@ -4,7 +4,7 @@ namespace Rebecca.BeWell.BlazorApp.Services.Interfaces
 {
     public interface INutritionService
     {
-        Task<bool> CreateNutrition(Nutrition nutrition);
+        Task<bool> CreateNutrition(Nutrition nutrition, string userID);
         Task<bool> DeleteNutrition(int Id);
         Task<Nutrition?> GetNutritionById(int Id);
         Task<List<Nutrition>?> GetNutritionsByUserId(string UserId);

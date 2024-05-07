@@ -2,16 +2,21 @@
 using Rebecca.BeWell.BlazorApp.Shared.Data;
 using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
 using Rebecca.BeWell.BlazorApp.Services.Interfaces;
+using System.Diagnostics;
 
 namespace Rebecca.BeWell.BlazorApp.Services
 {
     public class NutritionService : INutritionService
     {
+        private IProfileService _profileService;
         private ApplicationDbContext _context;
-        public NutritionService(ApplicationDbContext context)
+
+        public NutritionService(ApplicationDbContext context, IProfileService profileService)
         {
             _context = context;
+            _profileService = profileService;
         }
+       
 
         public async Task<List<NutritionType>?> GetNutritionTypes()
         {
@@ -41,14 +46,23 @@ namespace Rebecca.BeWell.BlazorApp.Services
 
         }
 
-        public async Task<bool> CreateNutrition(Nutrition nutrition)
+        public async Task<bool> CreateNutrition(Nutrition nutrition, string userID)
         {
             try
             {
+                NutritionType nutritionType = await _context.NutritionTypes.SingleOrDefaultAsync(a => a.Name == nutrition.NutritionType.Name);
+                nutrition.NutritionType = nutritionType;
+
+                Profile profile = await _profileService.GetProfileByUserId(userID);
+
+                List<Nutrition> nutritions = profile.Nutritions;
+
+                nutritions.Add(nutrition);
+
+                profile.Nutritions = nutritions;
 
                 _context.Nutritions.Add(nutrition);
                 await _context.SaveChangesAsync();
-
 
                 return true;
 
@@ -58,6 +72,8 @@ namespace Rebecca.BeWell.BlazorApp.Services
 
 
                 return false;
+
+
             }
         }
         public async Task<bool> UpdateNutrition(Nutrition nutrition)
@@ -67,7 +83,6 @@ namespace Rebecca.BeWell.BlazorApp.Services
                 Nutrition? a = await _context.Nutritions.SingleOrDefaultAsync(x => x.Id == nutrition.Id);
 
 
-                a.Name = nutrition.Name;
                 a.NutritionType = a.NutritionType;
                 a.Description = nutrition.Description;
                 a.TimeStamp = nutrition.TimeStamp;

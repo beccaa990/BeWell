@@ -60,6 +60,9 @@ namespace Rebecca.BeWell.BlazorApp.Services
                 ActivityType activityType = await _context.ActivityTypes.SingleOrDefaultAsync(a => a.Name == activity.ActivityType.Name);
                 activity.ActivityType = activityType;
 
+                Intensity intensity = await _context.Intensities.SingleOrDefaultAsync(a => a.Name == activity.Intensity.Name);
+                activity.Intensity = intensity;
+
                 Profile profile = await _profileService.GetProfileByUserId(userID);
 
                 List<Activity> activities = profile.Activities;

@@ -37,7 +37,7 @@
             </div>
             <div class="col">
                 <RadzenTextArea @bind-Value="@model.Text" Name="Description" />
-                <RadzenRequiredValidator Text="Title is required" Component="Description" />
+                <RadzenRequiredValidator Text="Description is required" Component="Description" />
             </div>
         </div>
         <div class="row" style="margin-bottom: 16px">
@@ -91,7 +91,7 @@
             </div>
             <div class="col">
                 <RadzenNumeric TValue="int" Min="1" @bind-Value="@model.Calories" Name="Calories" />
-                <RadzenRequiredValidator Text="Title is required" Component="Text" />
+                <RadzenRequiredValidator Text="Title is required" Component="Calories" />
             </div>
         </div>
 

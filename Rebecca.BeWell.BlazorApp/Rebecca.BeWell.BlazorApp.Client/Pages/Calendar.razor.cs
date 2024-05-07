@@ -23,7 +23,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         public System.Net.Http.HttpClient Http { get; set; }
 
 
-        public IList<Shared.Models.Appointment> appointments = new List<Shared.Models.Appointment>()
+        public List<Shared.Models.Appointment> appointments = new List<Shared.Models.Appointment>()
         {
             //new Shared.Models.Appointment { Start = DateTime.Today.AddDays(-2), End = DateTime.Today.AddDays(-2), Text = "Birthday" },
             //new Shared.Models.Appointment { Start = DateTime.Today.AddDays(-11), End = DateTime.Today.AddDays(-10), Text = "Day off" },
@@ -38,18 +38,25 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         {
             Rebecca.BeWell.BlazorApp.Shared.Data.Models.Profile profile = await Http.GetFromJsonAsync<Rebecca.BeWell.BlazorApp.Shared.Data.Models.Profile>("api/Profiles/user/current");
 
-            appointments = profile.Activities.Select(a => new Shared.Models.Appointment()
+
+
+            List<Shared.Models.Appointment> appointmentsActivities = profile.Activities.Select(a => new Shared.Models.Appointment()
             {
                 Text = a?.ActivityType?.Name,
                 Start = a.Start,
                 End = a.End,
-
-
             }).ToList();
 
 
+            List<Shared.Models.Appointment> appointmentsNutritions = profile.Nutritions.Select(a => new Shared.Models.Appointment()
+            {
+                Text = a?.NutritionType?.Name,
+                Start = a.Start,
+                End = a.Start.AddMinutes(10),
+            }).ToList();
 
-
+            appointments.AddRange(appointmentsActivities);
+            appointments.AddRange(appointmentsNutritions);
 
 
         }
