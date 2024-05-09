@@ -45,6 +45,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                 Text = a?.ActivityType?.Name,
                 Start = a.Start,
                 End = a.End,
+                Category= "activity"
             }).ToList();
 
 
@@ -53,12 +54,13 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                 Text = a?.NutritionType?.Name,
                 Start = a.Start,
                 End = a.Start.AddMinutes(10),
+                Category = "nutrition"
             }).ToList();
 
             appointments.AddRange(appointmentsActivities);
             appointments.AddRange(appointmentsNutritions);
 
-
+            await scheduler.Reload();
         }
         void OnSlotRender(SchedulerSlotRenderEventArgs args)
         {
@@ -119,10 +121,18 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         {
             // Never call StateHasChanged in AppointmentRender - would lead to infinite loop
 
-            if (args.Data.Text == "Birthday")
+            if (args.Data.Category == "activity")
             {
-                args.Attributes["style"] = "background: red";
+                args.Attributes["style"] = "background: orange";
             }
+
+            if (args.Data.Category == "nutrition")
+            {
+                args.Attributes["style"] = "background: green";
+            }
+
+
+
         }
 
         async Task OnAppointmentMove(SchedulerAppointmentMouseEventArgs<Shared.Models.Appointment> args)

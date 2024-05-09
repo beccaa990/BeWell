@@ -5,6 +5,9 @@ using Rebecca.BeWell.BlazorApp.Client;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
+builder.Services.AddBlazorBootstrap();
+
+builder.Services.AddRadzenComponents();
 
 builder.Services.AddAuthorizationCore();
 builder.Services.AddCascadingAuthenticationState();
