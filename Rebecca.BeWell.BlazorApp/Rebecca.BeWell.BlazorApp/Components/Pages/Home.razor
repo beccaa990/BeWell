@@ -31,172 +31,207 @@
         </CardFooter>
     </Card>
     <Card Class="mb-4" Style="width:18rem;">
-        <img src="/images/placeholder.png" alt="placeholder" />
         <CardBody>
-            <CardTitle>Card title</CardTitle>
-            <CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</CardText>
-            <CardText Class="text-muted">Last updated 3 mins ago</CardText>
+            <CardTitle>The greatest wealth is HEALTH!</CardTitle>
+            <CardText>
+                <p>Healthly is an outfit that looks different on everyone.</p>
+                <p>Rest time is as vital as your working time! </p>
+                <p>BeWell syncs with your lifestyle and sends alerts when it's time to rest and when it's time to accomplish life.</p>
+            </CardText>
+            <Button Color="ButtonColor.Primary" To="Account/Manage" Type="BlazorBootstrap.ButtonType.Link">Account</Button>
         </CardBody>
+            <CardFooter>
+            <CardText Class=""text-muted">Last updated 3 mins ago</CardText>
+            </CardFooter>
     </Card>
 </CardGroup>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 col-sm-12 p-4">
+            <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H3">Clock</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1">
+                Demonstrates using multiple pointers with RadzenRadialGauge.
+            </RadzenText>
+            <RadzenRadialGauge Style="width: 100%; height: 500px;">
+                <RadzenRadialGaugeScale Step="1" Min="0" Max="12" StartAngle="0" EndAngle="360" ShowFirstTick="false"
+                                        MinorStep=@minorStep
+                                        TickLength="20"
+                                        MinorTickLength="10"
+                                        TickLabelOffset="40"
+                                        TickPosition="GaugeTickPosition.Inside">
+                    <RadzenRadialGaugeScalePointer Value=@hours Length="0.6" ShowValue="false" />
+                    <RadzenRadialGaugeScalePointer Value=@seconds Length="0.9" Fill="red" Width="2" ShowValue="false" />
+                    <RadzenRadialGaugeScalePointer Value=@minutes Length="0.8" ShowValue="false" />
+                </RadzenRadialGaugeScale>
+            </RadzenRadialGauge>
+        </div>
+        <div class="col-md-6 col-sm-12 p-4">
+            <RadzenText TextStyle="TextStyle.H5" TagName="TagName.H3">Activity</RadzenText>
+            <RadzenText TextStyle="TextStyle.Body1">
+                Shows how to use multiple scales with RadzenArcGauge
+            </RadzenText>
+            <RadzenArcGauge @rendermode="@RenderMode.InteractiveServer" Style="width: 100%; height: 500px; background: #000">
+                <RadzenArcGaugeScale Min="0" Max="520" StartAngle="0" EndAngle="360" Fill="rgba(249, 32, 99, 0.5)">
+                    <RadzenArcGaugeScaleValue Value=@move Fill="rgb(249, 32, 99)">
+                        <Template>
+                            <svg width="100%" viewBox="0 0 240 120">
+                                <text x="90" y="10" fill="#fff">
+                                    Move <tspan fill="rgb(249, 32, 99)">@(Math.Round(move / 520 * 100))%</tspan>
+                                </text>
+                                <text x="90" y="28" fill="rgb(249, 32, 99)">
+                                    @move/520 cal
+                                </text>
+                                <text x="90" y="50" fill="#fff">
+                                    Exercise <tspan fill="rgb(203, 255, 0)">@(Math.Round(exercise / 30 * 100))%</tspan>
+                                </text>
+                                <text x="90" y="68" fill="rgb(203, 255, 0)">
+                                    @exercise/30 min
+                                </text>
+                                <text x="90" y="88" fill="#fff">
+                                    Stand <tspan fill="rgb(0, 253, 234)">@(Math.Round(stand / 12 * 100))%</tspan>
+                                </text>
+                                <text x="90" y="106" fill="rgb(0, 253, 234)">
+                                    @stand/12 hr
+                                </text>
+                            </svg>
+                        </Template>
+                    </RadzenArcGaugeScaleValue>
+                </RadzenArcGaugeScale>
+                <RadzenArcGaugeScale Min="0" Max="30" StartAngle="0" EndAngle="360" Radius="0.8" Fill="rgba(203, 255, 0, 0.5)">
+                    <RadzenArcGaugeScaleValue Value=@exercise Fill="rgb(203, 255, 0)" ShowValue="false" />
+                </RadzenArcGaugeScale>
+                <RadzenArcGaugeScale Min="0" Max="12" StartAngle="0" EndAngle="360" Radius="0.6" Fill="rgb(0, 253, 234, 0.5)">
+                    <RadzenArcGaugeScaleValue Value=@stand Fill="rgb(0, 253, 234)" ShowValue="false" />
+                </RadzenArcGaugeScale>
+            </RadzenArcGauge>
+        </div>
+    </div>
+</div>
 
-<DoughnutChart @ref="doughnutChart" Width="500" Class="mb-5" />
 
-<Button Type="BlazorBootstrap.ButtonType.Button" Color="ButtonColor.Primary" Size="Size.Small" @onclick="async () => await RandomizeAsync()"> Randomize </Button>
-<Button Type="BlazorBootstrap.ButtonType.Button" Color="ButtonColor.Primary" Size="Size.Small" @onclick="async () => await AddDataAsync()">Add Data</Button>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-lg-4 my-lg-5 order-lg-last text-center text-lg-start">
+            <p>
+                <label><span class="d-block mt-3 mb-1">Value</span><RadzenSlider Min="0" Max="260" @bind-Value=@value Style="width: 200px;" /></label>
+            </p>
+            <p>
+                <label><span class="d-block mt-3 mb-1">Tick position</span><RadzenDropDown @bind-Value=@tickPosition Data=@tickPositions Style="width: 200px;" /> </label>
+            </p>
+            <p>
+                <label class="mt-3"><RadzenCheckBox @bind-Value=@showValue /> Show the pointer value</label>
+            </p>
+        </div>
+        <div class="col-sm-12 col-lg-8 my-3 my-lg-5">
+            <RadzenRadialGauge Style="width: 100%; height: 300px;">
+                <RadzenRadialGaugeScale StartAngle="-150" EndAngle="150" Step="20" Min="0" Max="260" TickPosition=@tickPosition>
+                    <RadzenRadialGaugeScalePointer Value="100" Length="0.6" ShowValue=@showValue>
+                        <Template Context="pointer">
+                            <h4>
+                                @pointer.Value <sup>km/h</sup>
+                            </h4>
+                        </Template>
+                    </RadzenRadialGaugeScalePointer>
+                    <RadzenRadialGaugeScaleRange From="0" To="90" Fill="green" />
+                    <RadzenRadialGaugeScaleRange From="90" To="140" Fill="orange" />
+                    <RadzenRadialGaugeScaleRange From="140" To="260" Fill="red" />
+                </RadzenRadialGaugeScale>
+            </RadzenRadialGauge>
+        </div>
+    </div>
+</div>
 
 @code {
-    private DoughnutChart doughnutChart = default!;
-    private DoughnutChartOptions doughnutChartOptions = default!;
-    private ChartData chartData = default!;
-    private string[]? backgroundColors;
+    bool showValue = true;
+    double value = 100;
+    IEnumerable<GaugeTickPosition> tickPositions = Enum.GetValues(typeof(GaugeTickPosition)).Cast<GaugeTickPosition>();
+    GaugeTickPosition tickPosition = GaugeTickPosition.Inside;
 
-    private int datasetsCount = 0;
-    private int dataLabelsCount = 0;
+    Timer timer;
+    double hours;
+    double minutes;
+    double seconds;
 
-    private Random random = new();
+    double minorStep = 12 / 60.0;
+
+    double move = 338;
+    double exercise = 2;
+    double stand = 8;
+
 
     protected override void OnInitialized()
     {
-        backgroundColors = ColorBuilder.CategoricalTwelveColors;
-        chartData = new ChartData { Labels = GetDefaultDataLabels(4), Datasets = GetDefaultDataSets(3) };
-
-        doughnutChartOptions = new();
-        doughnutChartOptions.Responsive = true;
-        doughnutChartOptions.Plugins.Title!.Text = "2022 - Sales";
-        doughnutChartOptions.Plugins.Title.Display = true;
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
+        timer = new Timer(state =>
         {
-            // pass the plugin name to enable the data labels
-            await doughnutChart.InitializeAsync(chartData: chartData, chartOptions: doughnutChartOptions, plugins: new string[] { "ChartDataLabels" });
-        }
-        await base.OnAfterRenderAsync(firstRender);
+            var now = DateTime.Now;
+
+            hours = now.Hour % 12 + now.Minute / 60.0;
+
+            minutes = now.Minute * minorStep + now.Second * 12 / 3600.0;
+            seconds = now.Second * minorStep;
+
+            InvokeAsync(StateHasChanged);
+        }, null, 0, 1000);
     }
 
-    private async Task RandomizeAsync()
+    public void Dispose()
     {
-        if (chartData is null || chartData.Datasets is null || !chartData.Datasets.Any()) return;
-
-        var newDatasets = new List<IChartDataset>();
-
-        foreach (var dataset in chartData.Datasets)
-        {
-            if (dataset is DoughnutChartDataset doughnutChartDataset
-                && doughnutChartDataset is not null
-                && doughnutChartDataset.Data is not null)
-            {
-                var count = doughnutChartDataset.Data.Count;
-
-                var newData = new List<double>();
-                for (var i = 0; i < count; i++)
-                {
-                    newData.Add(random.Next(0, 100));
-                }
-
-                doughnutChartDataset.Data = newData;
-                newDatasets.Add(doughnutChartDataset);
-            }
-        }
-
-        chartData.Datasets = newDatasets;
-
-        await doughnutChart.UpdateAsync(chartData: chartData, chartOptions: doughnutChartOptions);
+        timer?.Dispose();
     }
 
-    private async Task AddDataAsync()
-    {
-        if (dataLabelsCount >= 12)
-            return;
+    // Chart<double> barChart;
 
-        if (chartData is null || chartData.Datasets is null)
-            return;
+    // protected override async Task OnAfterRenderAsync(bool firstRender)
+    // {
+    //     if (firstRender)
+    //     {
+    //         await HandleRedraw();
+    //     }
+    // }
 
-        var data = new List<IChartDatasetData>();
-        foreach (var dataset in chartData.Datasets)
-        {
-            if (dataset is DoughnutChartDataset doughnutChartDataset)
-            {
-                data.Add(new DoughnutChartDatasetData(doughnutChartDataset.Label, random.Next(0, 100), backgroundColors![dataLabelsCount]));
-            }
-        }
+    // async Task HandleRedraw()
+    // {
+    //     await barChart.Clear();
 
-        chartData = await doughnutChart.AddDataAsync(chartData, GetNextDataLabel(), data);
+    //     await barChart.AddLabelsDatasetsAndUpdate(Labels, GetBarChartDataset());
+    // }
 
-        dataLabelsCount += 1;
-    }
+    // private BarChartDataset<double> GetBarChartDataset()
+    // {
+    //     return new()
+    //         {
+    //             Label = "# of randoms",
+    //             Data = RandomizeData(),
+    //             BackgroundColor = backgroundColors,
+    //             BorderColor = borderColors,
+    //             BorderWidth = 1
+    //         };
+    // }
 
-    #region Data Preparation
+    // string[] Labels = { "Red", "Blue", "Yellow", "Green", "Purple", "Orange" };
+    // List<string> backgroundColors = new List<string> { ChartColor.FromRgba(255, 99, 132, 0.2f), ChartColor.FromRgba(54, 162, 235, 0.2f), ChartColor.FromRgba(255, 206, 86, 0.2f), ChartColor.FromRgba(75, 192, 192, 0.2f), ChartColor.FromRgba(153, 102, 255, 0.2f), ChartColor.FromRgba(255, 159, 64, 0.2f) };
+    // List<string> borderColors = new List<string> { ChartColor.FromRgba(255, 99, 132, 1f), ChartColor.FromRgba(54, 162, 235, 1f), ChartColor.FromRgba(255, 206, 86, 1f), ChartColor.FromRgba(75, 192, 192, 1f), ChartColor.FromRgba(153, 102, 255, 1f), ChartColor.FromRgba(255, 159, 64, 1f) };
 
-    private List<IChartDataset> GetDefaultDataSets(int numberOfDatasets)
-    {
-        var datasets = new List<IChartDataset>();
+    // List<double> RandomizeData()
+    // {
+    //     var r = new Random(DateTime.Now.Millisecond);
 
-        for (var index = 0; index < numberOfDatasets; index++)
-        {
-            var dataset = GetRandomDoughnutChartDataset();
+    //     return new List<double> {
+    //         r.Next( 3, 50 ) * r.NextDouble(),
+    //         r.Next( 3, 50 ) * r.NextDouble(),
+    //         r.Next( 3, 50 ) * r.NextDouble(),
+    //         r.Next( 3, 50 ) * r.NextDouble(),
+    //         r.Next( 3, 50 ) * r.NextDouble(),
+    //         r.Next( 3, 50 ) * r.NextDouble() };
+    // }
 
-            if (index == 0)
-                dataset.Datalabels.Anchor = "end";
-            else if (index == numberOfDatasets - 1)
-                dataset.Datalabels.Anchor = "start";
-            else
-                dataset.Datalabels.Anchor = "center";
+    // Task OnClicked(ChartMouseEventArgs e)
+    // {
+    //     var model = e.Model as BarChartModel;
 
-            datasets.Add(dataset);
-        }
-
-        return datasets;
-    }
-
-    private DoughnutChartDataset GetRandomDoughnutChartDataset()
-    {
-        datasetsCount += 1;
-        return new() { Label = $"Team {datasetsCount}", Data = GetRandomData(), BackgroundColor = GetRandomBackgroundColors() };
-    }
-
-    private List<double> GetRandomData()
-    {
-        var data = new List<double>();
-        for (var index = 0; index < dataLabelsCount; index++)
-        {
-            data.Add(random.Next(0, 100));
-        }
-
-        return data;
-    }
-
-    private List<string> GetRandomBackgroundColors()
-    {
-        var colors = new List<string>();
-        for (var index = 0; index < dataLabelsCount; index++)
-        {
-            colors.Add(backgroundColors![index]);
-        }
-
-        return colors;
-    }
-
-    private List<string> GetDefaultDataLabels(int numberOfLabels)
-    {
-        var labels = new List<string>();
-        for (var index = 0; index < numberOfLabels; index++)
-        {
-            labels.Add(GetNextDataLabel());
-            dataLabelsCount += 1;
-        }
-
-        return labels;
-    }
-
-    private string GetNextDataLabel() => $"Product {dataLabelsCount + 1}";
-
-    private string GetNextDataBackgrounfColor() => backgroundColors![dataLabelsCount];
-
-    #endregion  Data Preparation
+    //     Console.WriteLine($"Handling event for {nameof(BarChartModel)}: x:{model.X} y:{model.Y}");
+    //     return Task.CompletedTask;
+    // }
 }
-
-
