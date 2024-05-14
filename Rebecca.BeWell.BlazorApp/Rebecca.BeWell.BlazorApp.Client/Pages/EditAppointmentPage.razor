@@ -4,35 +4,148 @@
 <RadzenTemplateForm TItem="Appointment" Data="@model" Submit=@OnSubmit>
     <div class="row" style="margin-bottom: 16px">
         <div class="col-md-3">
-            <RadzenLabel Text="Text" />
+            <RadzenLabel Text="Type" />
         </div>
         <div class="col">
-            <RadzenTextBox @bind-Value="@model.Text" Name="Text" />
-            <RadzenRequiredValidator Text="Title is required" Component="Text" />
+            <RadzenDropDown Name="Types" ReadOnly="true" Placeholder="Please Select" TValue="string" @bind-Value="model.SelectedType"  Data="model.Types" Change="@OnTypeChange" />
+            <RadzenRequiredValidator Text="Title is required" Component="Types" />
         </div>
     </div>
-    <div class="row" style="margin-bottom: 16px">
-        <div class="col-md-3">
-            <RadzenLabel Text="Start" />
+    @if (model.SelectedType == "Activity")
+    {
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
+                <RadzenLabel Text="Activity Type" />
+            </div>
+            <div class="col">
+                <RadzenDropDown Name="ActivityType" Placeholder="Please Select" TValue="string" @bind-Value="model.SelectedActivityType" Data="model.ActivityTypes" Change="@OnActivityTypeChange" />
+                <RadzenRequiredValidator Text="Title is required" Component="ActivityType" />
+            </div>
         </div>
-        <div class="col">
-            <RadzenDatePicker @bind-Value="@model.Start" Name="Start" ShowTime="true" />
-            <RadzenRequiredValidator Text="Start is required" Component="Start" />
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
+                <RadzenLabel Text="Intensity Type" />
+            </div>
+            <div class="col">
+                <RadzenDropDown Name="IntensityType" Placeholder="Please Select" TValue="string" @bind-Value="model.SelectedIntensityType" Data="model.IntensityTypes" Change="@OnIntensityTypeChange" />
+                <RadzenRequiredValidator Text="Title is required" Component="IntensityType" />
+            </div>
         </div>
-    </div>
-    <div class="row" style="margin-bottom: 16px">
-        <div class="col-md-3">
-            <RadzenLabel Text="End" />
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
+                <RadzenLabel Text="Description" />
+            </div>
+            <div class="col">
+                <RadzenTextArea @bind-Value="@model.Text" Name="Description" />
+                <RadzenRequiredValidator Text="Description is required" Component="Description" />
+            </div>
         </div>
-        <div class="col">
-            <RadzenDatePicker Name="End" @bind-Value="@model.End" ShowTime="true" />
-            <RadzenRequiredValidator Component="End" Text="End is required" />
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
+                <RadzenLabel Text="Start" />
+            </div>
+            <div class="col">
+                <RadzenDatePicker @bind-Value="@model.Start" Name="Start" ShowTime="true" ShowSeconds="false" DateFormat="dd/MM/yyyy HH:mm" />
+                <RadzenRequiredValidator Text="Start is required" Component="Start" />
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col">
-            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="Save" />
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
+                <RadzenLabel Text="End" />
+            </div>
+            <div class="col">
+                <RadzenDatePicker Name="End" @bind-Value="@model.End" ShowTime="true" ShowSeconds="false" DateFormat="dd/MM/yyyy HH:mm" />
+                <RadzenRequiredValidator Component="End" Text="End is required" />
+            </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col">
+                <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="Save" />
+            </div>
+        </div>
+    }
+    @if (model.SelectedType == "Nutrition")
+    {
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
+                <RadzenLabel Text="Nutrition Type" />
+            </div>
+            <div class="col">
+                <RadzenDropDown Name="NutritionType" Placeholder="Please Select" TValue="string" @bind-Value="model.SelectedNutritionType" Data=" model.NutritionTypes" Change="@OnNutritionTypeChange" />
+                <RadzenRequiredValidator Text="Title is required" Component="NutritionType" />
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
+                <RadzenLabel Text="Description" />
+            </div>
+            <div class="col">
+                <RadzenTextArea @bind-Value="@model.Text" Name="Description" />
+                <RadzenRequiredValidator Text="Title is required" Component="Description" />
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
+                <RadzenLabel Text="Amount of Calories(Kcals)" />
+            </div>
+            <div class="col">
+                <RadzenNumeric TValue="int" Min="1" @bind-Value="@model.Calories" Name="Calories" />
+                <RadzenRequiredValidator Text="Title is required" Component="Calories" />
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
+                <RadzenLabel Text="Start" />
+            </div>
+            <div class="col">
+                <RadzenDatePicker @bind-Value="@model.Start" Name="Start" ShowTime="true" ShowSeconds="false" DateFormat="dd/MM/yyyy HH:mm" />
+                <RadzenRequiredValidator Text="Start is required" Component="Start" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col">
+                <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="Save" />
+            </div>
+        </div>
+    }
+    @if (model.SelectedType == "Sleep")
+    {
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
+                <RadzenLabel Text="Description" />
+            </div>
+            <div class="col">
+                <RadzenTextArea @bind-Value="@model.Text" Name="Description" />
+                <RadzenRequiredValidator Text="Title is required" Component="Description" />
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
+                <RadzenLabel Text="Start" />
+            </div>
+            <div class="col">
+                <RadzenDatePicker @bind-Value="@model.Start" Name="Start" ShowTime="true" ShowSeconds="false" />
+                <RadzenRequiredValidator Text="Start is required" Component="Start" />
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 16px">
+            <div class="col-md-3">
+                <RadzenLabel Text="End" />
+            </div>
+            <div class="col">
+                <RadzenDatePicker Name="End" @bind-Value="@model.End" ShowTime="true" ShowSeconds="false" />
+                <RadzenRequiredValidator Component="End" Text="End is required" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col">
+                <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="Save" />
+            </div>
+        </div>
+    }
+
 </RadzenTemplateForm>

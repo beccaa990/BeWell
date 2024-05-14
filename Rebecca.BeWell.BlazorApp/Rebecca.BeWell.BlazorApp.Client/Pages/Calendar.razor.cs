@@ -42,19 +42,25 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
             List<Shared.Models.Appointment> appointmentsActivities = profile.Activities.Select(a => new Shared.Models.Appointment()
             {
+                Id = a.Id,
                 Text = a?.ActivityType?.Name,
                 Start = a.Start,
                 End = a.End,
-                Category= "activity"
+                SelectedType = "Activity",
+                SelectedActivityType = a.ActivityType.Name,
+                SelectedIntensityType= a.Intensity.Name,              
             }).ToList();
 
 
             List<Shared.Models.Appointment> appointmentsNutritions = profile.Nutritions.Select(a => new Shared.Models.Appointment()
             {
-                Text = a?.NutritionType?.Name,
+                Id = a.Id,
+                Text = a?.Description,
                 Start = a.Start,
                 End = a.Start.AddMinutes(10),
-                Category = "nutrition"
+                SelectedType = "Nutrition",
+                SelectedNutritionType = a.NutritionType.Name,
+                Calories = a.Calories
             }).ToList();
 
             appointments.AddRange(appointmentsActivities);
@@ -99,9 +105,17 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
             var copy = new Rebecca.BeWell.BlazorApp.Shared.Models.Appointment
             {
+                Id = args.Data.Id,
+                //Category = args.Data.Category,
                 Start = args.Data.Start,
                 End = args.Data.End,
-                Text = args.Data.Text
+                Text = args.Data.Text,
+                SelectedType = args.Data.SelectedType,
+                SelectedSleepType = args.Data.SelectedActivityType,
+                SelectedActivityType = args.Data.SelectedActivityType,
+                SelectedIntensityType = args.Data.SelectedIntensityType,
+                SelectedNutritionType = args.Data.SelectedNutritionType,
+             
             };
 
             var data = await DialogService.OpenAsync<EditAppointmentPage>("Edit Appointment", new Dictionary<string, object> { { "model", copy } });
@@ -121,18 +135,15 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         {
             // Never call StateHasChanged in AppointmentRender - would lead to infinite loop
 
-            if (args.Data.Category == "activity")
+            if (args.Data.SelectedType == "Activity")
             {
                 args.Attributes["style"] = "background: orange";
             }
 
-            if (args.Data.Category == "nutrition")
+            if (args.Data.SelectedType == "Nutrition")
             {
                 args.Attributes["style"] = "background: green";
             }
-
-
-
         }
 
         async Task OnAppointmentMove(SchedulerAppointmentMouseEventArgs<Shared.Models.Appointment> args)

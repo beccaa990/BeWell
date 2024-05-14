@@ -74,15 +74,11 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                 activity.Mins = (int)Math.Round(timeDifference.TotalMinutes);
 
                 activity.Intensity = await Http.GetFromJsonAsync<Intensity>($"api/Intensities/GetIntensityByName/{model.SelectedIntensityType}");
-              
-
-
-
+             
                 activity.Start = model.Start;
                 activity.End = model.End;
 
                 await Http.PostAsJsonAsync<Activity>("api/Activities/Create", activity);
-
 
                 return;
             }

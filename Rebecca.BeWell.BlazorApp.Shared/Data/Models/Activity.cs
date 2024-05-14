@@ -7,8 +7,6 @@ namespace Rebecca.BeWell.BlazorApp.Shared.Data.Models
         [Key]
         public int Id { get; set; }
 
-
-
         public virtual ActivityType ActivityType { get; set; }
 
         public int Mins { get; set; }
