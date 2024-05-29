@@ -30,5 +30,7 @@
         public string SelectedIntensityType { get; set; }
 
         public int Calories { get; set; }
+
+        public int SleepHours { get; set; }
     }
 }
