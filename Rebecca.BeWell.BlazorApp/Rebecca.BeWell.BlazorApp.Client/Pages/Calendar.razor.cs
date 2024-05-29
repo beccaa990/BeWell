@@ -115,7 +115,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                 SelectedActivityType = args.Data.SelectedActivityType,
                 SelectedIntensityType = args.Data.SelectedIntensityType,
                 SelectedNutritionType = args.Data.SelectedNutritionType,
-             
+                Calories = args.Data.Calories,
             };
 
             var data = await DialogService.OpenAsync<EditAppointmentPage>("Edit Appointment", new Dictionary<string, object> { { "model", copy } });
