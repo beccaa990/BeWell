@@ -144,6 +144,10 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
             {
                 args.Attributes["style"] = "background: green";
             }
+            if (args.Data.SelectedType == "Sleep")
+            {
+                args.Attributes["style"] = "background: blue";
+            }
         }
 
         async Task OnAppointmentMove(SchedulerAppointmentMouseEventArgs<Shared.Models.Appointment> args)
