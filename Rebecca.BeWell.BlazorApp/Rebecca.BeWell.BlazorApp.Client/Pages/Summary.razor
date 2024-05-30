@@ -1,0 +1,25 @@
+﻿@page "/summary"
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
+
+<PageTitle>Summary!</PageTitle>
+
+<div Class="rz-p-0 rz-p-md-12">
+    <RadzenChart>
+        @foreach (var at in ActivityTypes.ToList())
+        {
+            var data = ActivityData.Where(a => a.Type == at.Name).ToList();
+            var typeName = at.Name;
+            if (data?.Any() == true)
+            {
+                <RadzenAreaSeries Smooth="true" Data="@data" CategoryProperty="Date" Title="@typeName" ValueProperty="Mins" >
+                    <RadzenSeriesDataLabels Visible="false" />
+                </RadzenAreaSeries>
+            }
+        }
+        <RadzenCategoryAxis Padding="20" />
+        <RadzenValueAxis>
+            <RadzenGridLines Visible="true" />
+            <RadzenAxisTitle Text="Activity in minutes" />
+        </RadzenValueAxis>
+    </RadzenChart>
+</div>
