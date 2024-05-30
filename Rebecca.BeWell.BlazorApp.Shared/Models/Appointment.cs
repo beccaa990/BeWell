@@ -31,6 +31,6 @@
 
         public int Calories { get; set; }
 
-        public int SleepHours { get; set; }
+        public decimal SleepHours { get; set; }
     }
 }

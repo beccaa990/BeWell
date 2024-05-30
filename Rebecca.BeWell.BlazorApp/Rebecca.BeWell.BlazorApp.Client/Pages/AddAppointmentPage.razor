@@ -136,7 +136,7 @@
                 <RadzenLabel Text="Sleep Hours" />
             </div>
             <div class="col">
-                <RadzenNumeric TValue="int" Min="1" @bind-Value="@model.SleepHours" Name="SleepHours" />
+                <RadzenNumeric TValue="decimal" Min="1" @bind-Value="@model.SleepHours" Name="SleepHours" Placeholder="8.0" Step="0.5" />
                 <RadzenRequiredValidator Text="Sleep Hours is required" Component="SleepHours" />
             </div>
         </div>

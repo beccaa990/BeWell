@@ -96,15 +96,14 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
             if (model.SelectedType == "Sleep")
             {
                 Sleep sleep = new Sleep();
-                sleep.Id = model.Id;
                 sleep.TimeStamp = DateTime.Now;
                 sleep.Description = model.Text;
                 TimeSpan timeDifference = model.End - model.Start;
-                sleep.Mins = (int)Math.Round(timeDifference.TotalMinutes);
-
-
-                await Http.PostAsJsonAsync<Sleep>("api/Sleeps/Update", sleep);
-
+                sleep.Mins = (int)(model.SleepHours * 60); //(int)Math.Round(timeDifference.TotalMinutes);
+                sleep.Start = model.Start;
+                sleep.End = new DateTime(model.Start.Year, model.Start.Month, model.Start.Day, 23, 59, 59);
+               
+                await Http.PostAsJsonAsync<Sleep>("api/Sleeps/Create", sleep);
 
                 return;
             }
