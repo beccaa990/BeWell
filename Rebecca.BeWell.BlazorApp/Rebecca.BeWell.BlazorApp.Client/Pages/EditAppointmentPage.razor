@@ -133,11 +133,11 @@
         </div>
         <div class="row" style="margin-bottom: 16px">
             <div class="col-md-3">
-                <RadzenLabel Text="End" />
+                <RadzenLabel Text="Sleep Hours" />
             </div>
             <div class="col">
-                <RadzenDatePicker Name="End" @bind-Value="@model.End" ShowTime="true" ShowSeconds="false" />
-                <RadzenRequiredValidator Component="End" Text="End is required" />
+                <RadzenNumeric TValue="int" Min="1" @bind-Value="@model.SleepHours" Name="SleepHours" />
+                <RadzenRequiredValidator Text="Sleep Hours is required" Component="SleepHours" />
             </div>
         </div>
         <div class="row">

@@ -2,15 +2,18 @@
 using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
 using Rebecca.BeWell.BlazorApp.Shared.Data;
 using Rebecca.BeWell.BlazorApp.Services.Interfaces;
+using System.Diagnostics;
 
 namespace Rebecca.BeWell.BlazorApp.Services
 {
     public class SleepService : ISleepService
     {
         private ApplicationDbContext _context;
-        public SleepService(ApplicationDbContext context)
+        private IProfileService _profileService;
+        public SleepService(ApplicationDbContext context , IProfileService profileService)
         {
             _context = context;
+            _profileService = profileService;
         }
         public async Task<Sleep?> GetSleepById(int Id)
         {
@@ -29,22 +32,25 @@ namespace Rebecca.BeWell.BlazorApp.Services
 
         }
 
-        public async Task<bool> CreateSleep(Sleep sleep)
+        public async Task<bool> CreateSleep(Sleep sleep, string userID)
         {
             try
             {
+                Profile profile = await _profileService.GetProfileByUserId(userID);
+
+                List<Sleep> sleeps = profile.Sleeps;
+
+                sleeps.Add(sleep);
+
+                profile.Sleeps = sleeps;
 
                 _context.Sleeps.Add(sleep);
                 await _context.SaveChangesAsync();
 
-
                 return true;
-
             }
             catch (Exception ex)
             {
-
-
                 return false;
             }
         }

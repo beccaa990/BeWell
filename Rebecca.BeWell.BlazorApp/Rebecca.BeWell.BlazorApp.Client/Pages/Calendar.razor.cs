@@ -63,8 +63,21 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                 Calories = a.Calories
             }).ToList();
 
+
+            List<Shared.Models.Appointment> appointmentsSleeps = profile.Sleeps.Select(a => new Shared.Models.Appointment()
+            {
+                Id = a.Id,
+                Text = a?.Description,
+                Start = a.Start,
+                End = a.End,
+                SelectedType = "Sleep",
+                SleepHours = a.Mins/60,
+            }).ToList();
+
             appointments.AddRange(appointmentsActivities);
             appointments.AddRange(appointmentsNutritions);
+            appointments.AddRange(appointmentsSleeps);
+
 
             await scheduler.Reload();
         }
@@ -116,6 +129,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                 SelectedIntensityType = args.Data.SelectedIntensityType,
                 SelectedNutritionType = args.Data.SelectedNutritionType,
                 Calories = args.Data.Calories,
+                SleepHours = args.Data.SleepHours,
             };
 
             var data = await DialogService.OpenAsync<EditAppointmentPage>("Edit Appointment", new Dictionary<string, object> { { "model", copy } });

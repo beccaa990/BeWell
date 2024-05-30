@@ -3,7 +3,7 @@ using Rebecca.BeWell.BlazorApp.Shared.Data.Models;
 using Rebecca.BeWell.BlazorApp.Services;
 using Rebecca.BeWell.BlazorApp.Services.Interfaces;
 using System.Diagnostics;
-
+using System.Security.Claims;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Rebecca.BeWell.BlazorApp.Controllers
@@ -46,8 +46,9 @@ namespace Rebecca.BeWell.BlazorApp.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create(Sleep sleep)
         {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            bool isCreated = await _sleepService.CreateSleep(sleep);
+            bool isCreated = await _sleepService.CreateSleep(sleep ,userId);
 
             return Ok(isCreated);
         }
