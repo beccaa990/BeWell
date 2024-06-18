@@ -1,20 +1,26 @@
-﻿@page "/summary"
+﻿@using Rebecca.BeWell.BlazorApp.Shared.Models
+@page "/summary"
 @rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
 
 <PageTitle>Summary!</PageTitle>
+@* @{
+    List<AreaSeriesItem> data = new();
+    string typeName  = string.e;
+
+    foreach (var at in ActivityTypes.ToList().Take(1))
+    {
+        data = ActivityData.Where(a => a.Type == at.Name).ToList();
+        typeName = at.Name;
+    }
+} *@
 
 <div Class="rz-p-0 rz-p-md-12">
     <RadzenChart>
-        @foreach (var at in ActivityTypes.ToList())
+        @foreach (var s in AreaSeriesList)
         {
-            var data = ActivityData.Where(a => a.Type == at.Name).ToList();
-            var typeName = at.Name;
-            if (data?.Any() == true)
-            {
-                <RadzenAreaSeries Smooth="true" Data="@data" CategoryProperty="Date" Title="@typeName" ValueProperty="Mins" >
-                    <RadzenSeriesDataLabels Visible="false" />
-                </RadzenAreaSeries>
-            }
+            <RadzenAreaSeries Smooth="true" Data="@s.Data" CategoryProperty="Date" Title="@s.TypeName" ValueProperty="Mins">
+                <RadzenSeriesDataLabels Visible="false" />
+            </RadzenAreaSeries>
         }
         <RadzenCategoryAxis Padding="20" />
         <RadzenValueAxis>
