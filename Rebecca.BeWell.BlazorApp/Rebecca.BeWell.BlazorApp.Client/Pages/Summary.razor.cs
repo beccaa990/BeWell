@@ -21,11 +21,16 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
         public List<AreaSeriesItem> ActivityData { get; set; }
         public List<Shared.Data.Models.ActivityType> ActivityTypes { get; set; }
 
+        public DateTime StartDate { get; set; } = new DateTime(2024, 6, 1);
+        public DateTime EndDate { get; set; } = new DateTime(2024, 6, 30);
+
         //public string typeName { get; set; }
 
         //public List<AreaSeriesItem> data { get; set; }
 
         public List<AreaSeries> AreaSeriesList { get; set; } = new List<AreaSeries> { };
+
+        public List<PieSeries> PieSeriesList { get; set; } = new List<PieSeries> { };
 
         protected override async Task OnInitializedAsync()
         {
@@ -33,7 +38,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
             ActivityTypes = await Http.GetFromJsonAsync<List<Shared.Data.Models.ActivityType>>("api/Activities/GetActivityTypes");
 
-            ActivityData = profile.Activities.Select(a => new Shared.Models.AreaSeriesItem()
+            ActivityData = profile.Activities.Where(d => d.Start >= StartDate && d.Start <= EndDate).Select(a => new Shared.Models.AreaSeriesItem()
             {
                 Date = DateOnly.FromDateTime(a.Start),
                 Mins = a.Mins,
@@ -43,15 +48,17 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
             foreach (var at in ActivityTypes)
             {
-                AreaSeries areaSeries = new AreaSeries()
-                {
-                    TypeName = at.Name,
-                    Data = ActivityData.Where(d => d.Type == at.Name).ToList(),
-                };
+                //foreach (var a in ActivityData.Where(a => a.Type == at.Name))
+                //{
+                    PieSeries pieSeries = new PieSeries()
+                    {
+                        TypeName = at.Name,
+                        TotalMins = ActivityData.Where(a => a.Type == at.Name).Sum(a => a.Mins),
+                    };
 
-                AreaSeriesList.Add(areaSeries);
+                    PieSeriesList.Add(pieSeries);
+                //}
             }
-
 
             //typeName = ActivityData.Select(x => x.Type).FirstOrDefault();
             //data = ActivityData.Where(x => x.Type == typeName).ToList();
