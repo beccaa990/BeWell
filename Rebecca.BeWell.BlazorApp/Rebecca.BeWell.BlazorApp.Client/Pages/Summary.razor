@@ -3,35 +3,9 @@
 @rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
 
 <PageTitle>Summary!</PageTitle>
-@* @{
-    List<AreaSeriesItem> data = new();
-    string typeName  = string.e;
-
-    foreach (var at in ActivityTypes.ToList().Take(1))
-    {
-        data = ActivityData.Where(a => a.Type == at.Name).ToList();
-        typeName = at.Name;
-    }
-} *@
-
-<div Class="rz-p-0 rz-p-md-12">
-    <RadzenChart>
-        @foreach (var s in AreaSeriesList)
-        {
-            <RadzenAreaSeries Smooth="true" Data="@s.Data" CategoryProperty="Date" Title="@s.TypeName" ValueProperty="Mins">
-                <RadzenSeriesDataLabels Visible="false" />
-            </RadzenAreaSeries>
-        }
-        <RadzenCategoryAxis Padding="20" />
-        <RadzenValueAxis>
-            <RadzenGridLines Visible="true" />
-            <RadzenAxisTitle Text="Activity in minutes" />
-        </RadzenValueAxis>
-    </RadzenChart>
-</div>
 
 <RadzenChart>
-    <RadzenPieSeries Data="@PieSeriesList" Title="Activities" CategoryProperty="TypeName" ValueProperty="TotalMins">
-        <RadzenSeriesDataLabels Visible="true" />
+        <RadzenPieSeries  Data="@PieSeriesList" Title="Total Minutes" CategoryProperty="TypeName" ValueProperty="TotalMins">
+        <RadzenSeriesDataLabels  Visible="true" />
     </RadzenPieSeries>
 </RadzenChart>

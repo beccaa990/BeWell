@@ -23,13 +23,6 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
         public DateTime StartDate { get; set; } = new DateTime(2024, 6, 1);
         public DateTime EndDate { get; set; } = new DateTime(2024, 6, 30);
-
-        //public string typeName { get; set; }
-
-        //public List<AreaSeriesItem> data { get; set; }
-
-        public List<AreaSeries> AreaSeriesList { get; set; } = new List<AreaSeries> { };
-
         public List<PieSeries> PieSeriesList { get; set; } = new List<PieSeries> { };
 
         protected override async Task OnInitializedAsync()
@@ -48,8 +41,6 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
 
             foreach (var at in ActivityTypes)
             {
-                //foreach (var a in ActivityData.Where(a => a.Type == at.Name))
-                //{
                     PieSeries pieSeries = new PieSeries()
                     {
                         TypeName = at.Name,
@@ -57,11 +48,7 @@ namespace Rebecca.BeWell.BlazorApp.Client.Pages
                     };
 
                     PieSeriesList.Add(pieSeries);
-                //}
             }
-
-            //typeName = ActivityData.Select(x => x.Type).FirstOrDefault();
-            //data = ActivityData.Where(x => x.Type == typeName).ToList();
         }
     }
 }
