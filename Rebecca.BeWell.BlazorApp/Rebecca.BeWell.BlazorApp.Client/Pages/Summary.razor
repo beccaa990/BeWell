@@ -1,12 +1,9 @@
 ﻿@using Rebecca.BeWell.BlazorApp.Shared.Models
 @using Microsoft.AspNetCore.Authorization
+@using BlazorBootstrap
 @page "/summary"
 @rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
 @attribute [Authorize]
 <PageTitle>Summary!</PageTitle>
 
-<RadzenChart>
-        <RadzenPieSeries  Data="@PieSeriesList" Title="Total Minutes" CategoryProperty="TypeName" ValueProperty="TotalMins">
-        <RadzenSeriesDataLabels  Visible="true" />
-    </RadzenPieSeries>
-</RadzenChart>
+<BlazorBootstrap.PieChart  @ref="pieChart" Width="500"  Class="mb-5" />
