@@ -1,7 +1,8 @@
 ﻿@using Rebecca.BeWell.BlazorApp.Shared.Models
+@using Microsoft.AspNetCore.Authorization
 @page "/summary"
 @rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
-
+@attribute [Authorize]
 <PageTitle>Summary!</PageTitle>
 
 <RadzenChart>

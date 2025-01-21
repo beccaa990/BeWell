@@ -6,6 +6,7 @@
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.WebUtilities
 @using Rebecca.BeWell.BlazorApp.Shared.Data
+@using Rebecca.BeWell.BlazorApp.Services.Interfaces
 
 @inject UserManager<ApplicationUser> UserManager
 @inject IUserStore<ApplicationUser> UserStore
@@ -14,6 +15,7 @@
 @inject ILogger<Register> Logger
 @inject NavigationManager NavigationManager
 @inject IdentityRedirectManager RedirectManager
+@inject IProfileService ProfileService
 
 <PageTitle>Register</PageTitle>
 
@@ -53,7 +55,7 @@
                 <ValidationMessage For="() => Input.LastName" class="text-danger" />
             </div>
             <div class="form-floating mb-3">
-                <DateInput  TValue="DateOnly" @bind-Value="Input.DOB" Placeholder="15/05/2002" />
+                <DateInput TValue="DateOnly" @bind-Value="Input.DOB" Placeholder="15/05/2002" />
                 <label for="DOB" class="form-label">DOB</label>
                 <ValidationMessage For="() => Input.DOB" class="text-danger" />
             </div>
@@ -96,8 +98,13 @@
         user.EmailConfirmed = true;
 
         await UserManager.UpdateAsync(user);
-       
 
+        BlazorApp.Shared.Data.Models.Profile profile = new BlazorApp.Shared.Data.Models.Profile()
+            {
+                UserID = user.Id,
+            };
+
+        await ProfileService.CreateProfile(profile);
 
         //var userId = await UserManager.GetUserIdAsync(user);
         //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user);
@@ -164,9 +171,9 @@
         [Display(Name = "First Name")]
         public string FirstName { get; set; } = "";
 
-        
+
         [Required]
-       
+
         [Display(Name = "Last Name")]
         public string LastName { get; set; } = "";
 
@@ -174,7 +181,7 @@
 
         [Required]
         [Display(Name = "DOB")]
-        public DateOnly DOB { get; set; } 
-        
+        public DateOnly DOB { get; set; }
+
     }
 }

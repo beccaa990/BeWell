@@ -1,7 +1,9 @@
 ﻿@using Rebecca.BeWell.BlazorApp.Shared.Models
+@using Microsoft.AspNetCore.Authorization
+
 @page "/calendar"
 @rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
-
+@attribute [Authorize]
 
 <PageTitle>Calendar</PageTitle>
 
@@ -15,10 +17,9 @@
 }
 else
 {
-    <RadzenScheduler  @ref=@scheduler SlotRender=@OnSlotRender style="height: 768px;" TItem="Appointment" Data=@appointments StartProperty="Start" EndProperty="End"
+    <RadzenScheduler  @ref=@scheduler SlotRender=@OnSlotRender style="height: 768px;" TItem="Rebecca.BeWell.BlazorApp.Shared.Models.Appointment" Data=@appointments StartProperty="Start" EndProperty="End"
                      TextProperty="Text" SelectedIndex="2"
-                     SlotSelect=@OnSlotSelect AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender
-                     AppointmentMove=@OnAppointmentMove>
+                     SlotSelect=@OnSlotSelect AppointmentSelect=@OnAppointmentSelect AppointmentRender=@OnAppointmentRender>
         <RadzenDayView />
         <RadzenWeekView />
         <RadzenMonthView />
